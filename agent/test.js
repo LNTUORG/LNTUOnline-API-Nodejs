@@ -17,7 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
- var cookieAgent = require('./cookie_agent');
+/*
+ * Cookie agent Test
+ */
+
+var cookieAgent = require('./cookie_agent');
 
 cookieAgent.getCookie('1306030411', '0123', function (cookie) {
 	console.log(cookie)
