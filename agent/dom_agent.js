@@ -17,41 +17,36 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
- * Cookie agent Test
- */
-
 var cookieAgent = require('./cookie_agent');
-var agentConfig = require('./agent_config');
-var async = require('async');
+var request = require('superagent-charset');
 
-// async.waterfall([
-// 	function (callback) {
-// 		agentConfig.getCurrentUrl(function (baseUrl) {
-// 			callback(null, baseUrl);
-// 		});
-// 	},
-// 	function (data, callback) {
-// 		console.log(data)
-// 	}
+function getDOMTypeNormal(url, userId, password, callback) {
 
-// 	], function (err, result) {
+	cookieAgent.getCookie(userId, password, function (cookie) {
+		agentConfig.getCurrentUrl(function (baseUrl) {
+			request
+			  
+		});
+  });
+	agentConfig.getCurrentUrl(function (baseUrl) {
+		request
+			.post(baseUrl + 'j_acegi_security_check')
+			.send('j_username=' + userId)
+			.send('j_password=' + password)
+			.set('Accept', 'application/json')
+			.set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
+			.charset('gbk')
+			.end(function(err, res) {
 
-// });
+				if (err) {
+					callback('error');
+				}
+				var result = res.redirects[0];
 
-// console.log(agentConfig.J_SESSIONID)
-
-// cookieAgent.getCookie('1306030411', '0123', function (cookie) {
-// 	console.log(cookie)
-// });
-// agentConfig.getCurrentUrl(function (base) {
-// 	console.log(base);
-// });
-
-var str = 'http://60.18.131.131:11180/academic/common/security/login.jsp;jsessionid=99D7AD2200204AB9B29FC0C01623A2F3.T55?login_error=1'
-console.log(str.indexOf('frameset.jsp'));
-// if (str.indexOf('frameset.jsp')) {
-	
-// 	result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
-// 	callback(null, result);
-// }
+				if (result.indexOf('frameset.jsp')) {
+					cookie = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
+					callback(cookie);
+				}
+			});
+	});
+}

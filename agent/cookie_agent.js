@@ -19,29 +19,47 @@
 
 var agentConfig = require('./agent_config');
 var request = require('superagent-charset');
+var async = require('async');
 
-function getCookie(userId, password, cb) {
-	agentConfig.getCurrentUrl(function(baseUrl) {
+function getCookie(userId, password, callback) {
+	'use strict';
+	async.waterfall([
+	function (callback) {
+		agentConfig.getCurrentUrl(function (baseUrl) {
+			callback(null, baseUrl);
+		});
+	},
+	function (baseUrl, callback) {
 		request
-			.post(baseUrl + 'j_acegi_security_check')
-			.send('j_username=' + userId)
+		  .post(baseUrl + 'j_acegi_security_check')
+		  .send('j_username=' + userId)
 			.send('j_password=' + password)
 			.set('Accept', 'application/json')
 			.set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
 			.charset('gbk')
-			.end(function(err, res) {
-
+			.end(function (err, res) {
 				if (err) {
-					cb('error');
+					callback('error');
 				}
-				var result = res.redirects[0];
+				let result = res.redirects[0];
 
-				if (result.indexOf('frameset.jsp')) {
-					cookie = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
-					cb(cookie);
+				if (result.indexOf('frameset.jsp') > 0) {
+					result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
+					callback(null, result);
+				} else {
+					callback('error');
 				}
 			});
-	});
+	}],
+	function (err, result) {
+		if (err == 'error') {
+			callback(err)
+		} else {
+			callback(result);
+		}
+});
 }
+
+getCookie('1306030411', '0123')
 
 exports.getCookie = getCookie;

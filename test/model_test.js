@@ -17,16 +17,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-var J_SESSIONID = 'JSESSIONID';
-exports.J_SESSIONID = J_SESSIONID;
+var student = require('../model/student');
 
-function getCurrentUrl(callback) {
-
-  var urls = ['http://60.18.131.131:11080/academic/', 'http://60.18.131.131:11081/academic/', 'http://60.18.131.131:11180/academic/', 'http://60.18.131.131:11181/academic/', 'http://60.18.131.131:11080/newacademic/', 'http://60.18.131.131:11081/newacademic/', 'http://60.18.131.133:11180/newacademic/', 'http://60.18.131.133:11181/newacademic/'];
-	
-	setTimeout(function () {
-		callback(urls[2]);
-	}, 2000);
-}
-
-exports.getCurrentUrl = getCurrentUrl;
+var stu = new student();
+stu.name = 'asd'
+console.log(stu.name)
