@@ -21,39 +21,46 @@
  * Cookie agent Test
  */
 
+var studentAgent = require('./agent/student_agent');
 var domAgent = require('./agent/dom_agent');
-// var cookieAgent = require('./agent/cookie_agent');
-// var agentConfig = require('./agent/agent_config');
-// var async = require('async');
+var cookieAgent = require('./agent/cookie_agent');
+var agentConfig = require('./agent/agent_config');
+var async = require('async');
 
-domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function (html) {
-	console.log(html);
-})
 
-// cookieAgent.main('1306030411', '0123', function (account) {
+studentAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123')
+
+// domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(html) {
+// 	console.log(html);
+// })
+
+// var str = '                            中国';
+// console.log(str.replace(/(^\s*)|(\s*$)/g, ''));
+
+// cookieAgent.main('1306030411', '0123', function(account) {
 // 	console.log(account)
 // });
 
 // async.waterfall([
-// 	function (callback) {
-// 		agentConfig.getCurrentUrl(function (baseUrl) {
+// 	function(callback) {
+// 		agentConfig.getCurrentUrl(function(baseUrl) {
 // 			callback(null, baseUrl);
 // 		});
 // 	},
-// 	function (data, callback) {
+// 	function(data, callback) {
 // 		console.log(data)
 // 	}
 
-// 	], function (err, result) {
+// ], function(err, result) {
 
 // });
 
 // console.log(agentConfig.J_SESSIONID);
 
-// cookieAgent.getCookie('1306030411', '0123', function (cookie) {
+// cookieAgent.getCookie('1306030411', '0123', function(cookie) {
 // 	console.log(cookie)
 // });
-// agentConfig.getCurrentUrl(function (base) {
+// agentConfig.getCurrentUrl(function(base) {
 // 	console.log(base);
 // });
 
@@ -61,11 +68,11 @@ domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', func
 // console.log(str)
 // console.log(str.indexOf('frameset.jsp'));
 // if (str.indexOf('frameset.jsp')) {
-	
+
 // 	result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
 // 	callback(null, result);
 // }
 // if (str) {
-	
+
 // 	console.log('asd')
 // }

@@ -30,31 +30,32 @@ var account = {
 };
 
 var domRequest = {
-  reqUrl: '',
-  resText: ''
+	reqUrl: '',
+	resText: ''
 };
 
-var main = function (url, userId, password, callback) {
+var main = function(url, userId, password, callback) {
 	account.userId = userId;
 	account.password = password;
 	domRequest.reqUrl = url;
-  async.waterfall([
-  	  getAccount,
-  	  getDOMTypeNormal
-  	],
-  	function (err, final) {
-  		callback(domRequest.resText);
-  });
+	async.waterfall([
+			getAccount,
+			getDOMTypeNormal
+		],
+		function(err, final) {
+			callback(domRequest.resText);
+		}
+	);
 }
 
-var getAccount = function (callback) {
-	cookieAgent.main(account.userId, account.password, function (acc) {
+var getAccount = function(callback) {
+	cookieAgent.main(account.userId, account.password, function(acc) {
 		account = acc;
 		callback(null, acc)
-  });
+	});
 };
 
-var getDOMTypeNormal = function (data, callback) {
+var getDOMTypeNormal = function(data, callback) {
 	request
 		.get(account.baseUrl + domRequest.reqUrl)
 		.set('Cookie', 'JSESSIONID=' + account.cookie + '; AJSTAT_ok_times=1')

@@ -38,7 +38,8 @@ var main = function(userId, password, callback) {
 		],
 		function(err, final) {
 			callback(account);
-		});
+		}
+	);
 };
 
 var getBaseUrl = function(callback) {
