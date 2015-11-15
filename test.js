@@ -21,9 +21,13 @@
  * Cookie agent Test
  */
 
-var cookieAgent = require('./cookie_agent');
-var agentConfig = require('./agent_config');
-var async = require('async');
+var cookieAgent = require('./agent/cookie_agent');
+// var agentConfig = require('./agent/agent_config');
+// var async = require('async');
+
+cookieAgent.main('1306030411', '0123', function (cookie) {
+	console.log(cookie)
+});
 
 // async.waterfall([
 // 	function (callback) {
@@ -39,7 +43,7 @@ var async = require('async');
 
 // });
 
-// console.log(agentConfig.J_SESSIONID)
+// console.log(agentConfig.J_SESSIONID);
 
 // cookieAgent.getCookie('1306030411', '0123', function (cookie) {
 // 	console.log(cookie)
@@ -48,10 +52,14 @@ var async = require('async');
 // 	console.log(base);
 // });
 
-var str = 'http://60.18.131.131:11180/academic/common/security/login.jsp;jsessionid=99D7AD2200204AB9B29FC0C01623A2F3.T55?login_error=1'
-console.log(str.indexOf('frameset.jsp'));
+// var str = 'http://60.18.131.131:11180/academic/common/security/login.jsp;jsessionid=99D7AD2200204AB9B29FC0C01623A2F3.T55?login_error=1'
+// console.log(str.indexOf('frameset.jsp'));
 // if (str.indexOf('frameset.jsp')) {
 	
 // 	result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
 // 	callback(null, result);
+// }
+// if (str) {
+	
+// 	console.log('asd')
 // }
