@@ -37,7 +37,7 @@ var main = function(userId, password, callback) {
 			getCookie
 		],
 		function(err, final) {
-			callback(account.cookie);
+			callback(account);
 		});
 };
 
@@ -67,7 +67,7 @@ var getCookie = function(baseUrl, callback) {
 			if (result.indexOf('frameset.jsp') > 0) {
 				result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
 				account.cookie = result;
-				callback(result);
+				callback(null, result);
 			} else {
 				account.cookie = agentConfig.ACCOUNT_ERROR;
 				callback(agentConfig.ACCOUNT_ERROR);

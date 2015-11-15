@@ -19,9 +19,6 @@
 
 'use strict';
 
-var J_SESSIONID = 'JSESSIONID';
-exports.J_SESSIONID = J_SESSIONID;
-
 var NET_ERROR = 'NET_ERROR';
 var ACCOUNT_ERROR = 'ACCOUNT_ERROR';
 exports.NET_ERROR = NET_ERROR;

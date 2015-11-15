@@ -21,13 +21,18 @@
  * Cookie agent Test
  */
 
-var cookieAgent = require('./agent/cookie_agent');
+var domAgent = require('./agent/dom_agent');
+// var cookieAgent = require('./agent/cookie_agent');
 // var agentConfig = require('./agent/agent_config');
 // var async = require('async');
 
-cookieAgent.main('1306030411', '0123', function (cookie) {
-	console.log(cookie)
-});
+domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function (html) {
+	console.log(html);
+})
+
+// cookieAgent.main('1306030411', '0123', function (account) {
+// 	console.log(account)
+// });
 
 // async.waterfall([
 // 	function (callback) {
@@ -53,6 +58,7 @@ cookieAgent.main('1306030411', '0123', function (cookie) {
 // });
 
 // var str = 'http://60.18.131.131:11180/academic/common/security/login.jsp;jsessionid=99D7AD2200204AB9B29FC0C01623A2F3.T55?login_error=1'
+// console.log(str)
 // console.log(str.indexOf('frameset.jsp'));
 // if (str.indexOf('frameset.jsp')) {
 	
