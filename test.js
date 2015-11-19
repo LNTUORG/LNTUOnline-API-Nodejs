@@ -37,7 +37,7 @@ var studentAgent = require('./agent/student_agent');
 // arr.push(b);
 
 // console.log(arr);
-studentAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function (student) {
+studentAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(student) {
 	console.log(student);
 });
 

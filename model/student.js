@@ -62,29 +62,29 @@ var Student = {
 function EntranceExam() {
 	return {
 		name: '',
-	  score: ''
+		score: ''
 	};
 };
 
 function EducationExperience() {
 	return {
 		startTime: '',
-	  endTime: '',
-	  schoolInfo: '',
-	  witness: ''
+		endTime: '',
+		schoolInfo: '',
+		witness: ''
 	};
 };
 
 function Family() {
 	return {
 		name: '',
-	  relationship: '',
-	  politicalAffiliation: '',
-	  job: '',
-	  post: '',
-	  workLocation: '',
-	  tel: ''
-	 };
+		relationship: '',
+		politicalAffiliation: '',
+		job: '',
+		post: '',
+		workLocation: '',
+		tel: ''
+	};
 };
 
 

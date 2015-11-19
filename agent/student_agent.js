@@ -25,34 +25,34 @@ var domAgent = require('./dom_agent');
 var student = require('../model/student');
 
 var info = {
-	reqUrl: '',
-	userId: '',
-	password: ''
+  reqUrl: '',
+  userId: '',
+  password: ''
 };
 
 var laStudent = student.Student;
 
-var main = function (url, userId, password, callback) {
-	info.reqUrl = url;
-	info.userId = userId;
-	info.password = password;
-	async.waterfall([
-			getDOMTypeNormal,
-			analyseHTML
-		],
-		function(err, final) {
-			callback(laStudent);
-		}
-	);
+var main = function(url, userId, password, callback) {
+  info.reqUrl = url;
+  info.userId = userId;
+  info.password = password;
+  async.waterfall([
+      getDOMTypeNormal,
+      analyseHTML
+    ],
+    function(err, final) {
+      callback(laStudent);
+    }
+  );
 };
 
-var getDOMTypeNormal = function (callback) {
-	domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(html) {
-	  callback(null, html);
+var getDOMTypeNormal = function(callback) {
+  domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(html) {
+    callback(null, html);
   })
 };
 
-var analyseHTML = function (html, callback) {
+var analyseHTML = function(html, callback) {
   var $ = cheerio.load(html);
 
   // 基本信息
@@ -97,7 +97,7 @@ var analyseHTML = function (html, callback) {
 
   var laEntranceExamArr = [];
   var laEntranceExam;
-  $('td', exams).each(function (index, element) {
+  $('td', exams).each(function(index, element) {
     if (index % 2 == 0) {
       laEntranceExam = student.EntranceExam();
       laEntranceExam.name = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
@@ -114,7 +114,7 @@ var analyseHTML = function (html, callback) {
   var laEducationExperienceArr = [];
   var laEducationExperience;
 
-  $('td', edus).each(function (index, element) {
+  $('td', edus).each(function(index, element) {
     if (index % 4 == 0) {
       laEducationExperience = student.EducationExperience();
       laEducationExperience.startTime = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
@@ -137,7 +137,7 @@ var analyseHTML = function (html, callback) {
   var laFamilyArr = [];
   var laFamily;
 
-  $('td', families).each(function (index, element) {
+  $('td', families).each(function(index, element) {
     if (index % 7 == 0) {
       laFamily = student.Family();
       laFamily.name = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
