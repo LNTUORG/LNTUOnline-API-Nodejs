@@ -57,42 +57,38 @@ var Student = {
 	entranceExams: [], // 高考科目
 	educationExperiences: [], // 教育经历
 	familys: [], // 家人
-	disciplinaryActions: [] // 处分
 };
 
-var EntranceExam = {
-	name: '',
-  score: ''
+function EntranceExam() {
+	return {
+		name: '',
+	  score: ''
+	};
 };
 
-var EducationExperience = {
-	startTime: '',
-  endTime: '',
-  schoolInfo: '',
-  witness: ''
+function EducationExperience() {
+	return {
+		startTime: '',
+	  endTime: '',
+	  schoolInfo: '',
+	  witness: ''
+	};
 };
 
-var Family = {
-	name: '',
-  relationship: '',
-  politicalAffiliation: '',
-  job: '',
-  post: '',
-  workLocation: '',
-  tel: ''
+function Family() {
+	return {
+		name: '',
+	  relationship: '',
+	  politicalAffiliation: '',
+	  job: '',
+	  post: '',
+	  workLocation: '',
+	  tel: ''
+	 };
 };
 
-var DisciplinaryAction = {
-	level: '',
-  createTime: '',
-  createReason: '',
-  cancelTime: '',
-  cancelReason: '',
-  status: '',
-  remark: ''
-};
 
 exports.Student = Student;
+exports.EducationExperience = EducationExperience;
 exports.EntranceExam = EntranceExam;
 exports.Family = Family;
-exports.DisciplinaryAction = DisciplinaryAction;

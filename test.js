@@ -22,13 +22,24 @@
  */
 
 var studentAgent = require('./agent/student_agent');
-var domAgent = require('./agent/dom_agent');
-var cookieAgent = require('./agent/cookie_agent');
-var agentConfig = require('./agent/agent_config');
-var async = require('async');
+// var domAgent = require('./agent/dom_agent');
+// var cookieAgent = require('./agent/cookie_agent');
+// var agentConfig = require('./agent/agent_config');
+// var async = require('async');
 
+// a = { name: '语文', score: '108' };
+// b = { name: '数学', score: '106' };
+// c = { name: '外语', score: '115' };
+// d = { name: '理综', score: '192' };
 
-studentAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123')
+// arr = [];
+// arr.push(a);
+// arr.push(b);
+
+// console.log(arr);
+studentAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function (student) {
+	console.log(student);
+});
 
 // domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(html) {
 // 	console.log(html);

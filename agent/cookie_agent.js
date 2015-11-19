@@ -45,8 +45,8 @@ var main = function(userId, password, callback) {
 var getBaseUrl = function(callback) {
 	var urls = ['http://60.18.131.131:11080/academic/', 'http://60.18.131.131:11081/academic/', 'http://60.18.131.131:11180/academic/', 'http://60.18.131.131:11181/academic/', 'http://60.18.131.131:11080/newacademic/', 'http://60.18.131.131:11081/newacademic/', 'http://60.18.131.133:11180/newacademic/', 'http://60.18.131.133:11181/newacademic/'];
 	setTimeout(function() {
-		account.baseUrl = urls[2];
-		callback(null, urls[2]);
+		account.baseUrl = urls[4];
+		callback(null, urls[4]);
 	}, 100);
 };
 

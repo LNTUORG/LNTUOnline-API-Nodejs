@@ -41,7 +41,7 @@ var main = function (url, userId, password, callback) {
 			analyseHTML
 		],
 		function(err, final) {
-			
+			callback(laStudent);
 		}
 	);
 };
@@ -54,6 +54,8 @@ var getDOMTypeNormal = function (callback) {
 
 var analyseHTML = function (html, callback) {
   var $ = cheerio.load(html);
+
+  // 基本信息
   laStudent.id = String($('td', html)[1].children[0].data).replace(/(^\s*)|(\s*$)/g, '');
   laStudent.name = String($('td', html)[4].children[0].data).replace(/(^\s*)|(\s*$)/g, '');
   laStudent.englishName = String($('td', html)[6].children[0].data).replace(/(^\s*)|(\s*$)/g, '');
@@ -90,7 +92,78 @@ var analyseHTML = function (html, callback) {
   laStudent.remarks = String($('td', html)[34].children[0].data).replace(/(^\s*)|(\s*$)/g, '');
   laStudent.photoUrl = String($('img', html)[0].attribs.src);
 
-   console.log(laStudent)
+  // 高考科目
+  var exams = $('table[class="infolist_hr"]', html).html();
+
+  var laEntranceExamArr = [];
+  var laEntranceExam;
+  $('td', exams).each(function (index, element) {
+    if (index % 2 == 0) {
+      laEntranceExam = student.EntranceExam();
+      laEntranceExam.name = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+
+    } else {
+      laEntranceExam.score = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+      laEntranceExamArr.push(laEntranceExam);
+    }
+  });
+  laStudent.entranceExams = laEntranceExamArr;
+
+  // 教育经历
+  var edus = $('table[id="resume"]', html).html();
+  var laEducationExperienceArr = [];
+  var laEducationExperience;
+
+  $('td', edus).each(function (index, element) {
+    if (index % 4 == 0) {
+      laEducationExperience = student.EducationExperience();
+      laEducationExperience.startTime = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 4 == 1) {
+      laEducationExperience.endTime = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 4 == 2) {
+      laEducationExperience.schoolInfo = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 4 == 3) {
+      laEducationExperience.witness = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+      laEducationExperienceArr.push(laEducationExperience);
+    };
+  });
+  laStudent.educationExperiences = laEducationExperienceArr;
+
+  // 家庭情况
+  var families = $('table[id="familyinfo"]', html).html();
+  var laFamilyArr = [];
+  var laFamily;
+
+  $('td', families).each(function (index, element) {
+    if (index % 7 == 0) {
+      laFamily = student.Family();
+      laFamily.name = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 7 == 1) {
+      laFamily.relationship = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 7 == 2) {
+      laFamily.politicalAffiliation = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 7 == 3) {
+      laFamily.job = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 7 == 4) {
+      laFamily.post = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 7 == 5) {
+      laFamily.workLocation = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+    };
+    if (index % 7 == 6) {
+      laFamily.tel = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
+      laFamilyArr.push(laFamily);
+    };
+  });
+  laStudent.familys = laFamilyArr;
+  callback(null, laStudent);
 }
 
 exports.main = main;
