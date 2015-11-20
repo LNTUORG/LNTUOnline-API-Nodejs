@@ -1,20 +1,9 @@
 /**
- * Copyright (C) 2015-2016 LNTU.ORG (https://www.lntu.org)
- * Copyright (C) 2013-2015 PUPBOSS. (https://www.pupboss.com)
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * student_agent.js
+ * lntuolapiv3
+ * 
+ * Created by Li Jie on 11/14/15.
+ * Copyright (c) 2015 PUPBOSS. All rights reserved.
  */
 
 'use strict';
@@ -118,17 +107,17 @@ var analyseHTML = function(html, callback) {
     if (index % 4 == 0) {
       laEducationExperience = student.EducationExperience();
       laEducationExperience.startTime = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 4 == 1) {
       laEducationExperience.endTime = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 4 == 2) {
       laEducationExperience.schoolInfo = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 4 == 3) {
       laEducationExperience.witness = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
       laEducationExperienceArr.push(laEducationExperience);
-    };
+    }
   });
   laStudent.educationExperiences = laEducationExperienceArr;
 
@@ -141,26 +130,26 @@ var analyseHTML = function(html, callback) {
     if (index % 7 == 0) {
       laFamily = student.Family();
       laFamily.name = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 7 == 1) {
       laFamily.relationship = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 7 == 2) {
       laFamily.politicalAffiliation = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 7 == 3) {
       laFamily.job = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 7 == 4) {
       laFamily.post = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 7 == 5) {
       laFamily.workLocation = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
-    };
+    }
     if (index % 7 == 6) {
       laFamily.tel = element.children[0].data.replace(/(^\s*)|(\s*$)/g, '');
       laFamilyArr.push(laFamily);
-    };
+    }
   });
   laStudent.familys = laFamilyArr;
   callback(null, laStudent);
