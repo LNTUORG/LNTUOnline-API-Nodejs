@@ -9,6 +9,7 @@
 'use strict';
 
 var cookieAgent = require('./cookie_agent');
+var agentConfig = require('./agent_config');
 var request = require('superagent-charset');
 var async = require('async');
 
@@ -46,6 +47,10 @@ var getAccount = function(callback) {
 };
 
 var getDOMTypeNormal = function(data, callback) {
+	if (account.cookie == agentConfig.ERROR_INFO.ACCOUNT_ERROR) {
+		domRequest.resText = agentConfig.ERROR_INFO.ACCOUNT_ERROR;
+		callback(account.cookie);
+	}
 	request
 		.get(account.baseUrl + domRequest.reqUrl)
 		.set('Cookie', 'JSESSIONID=' + account.cookie + '; AJSTAT_ok_times=1')
@@ -54,15 +59,17 @@ var getDOMTypeNormal = function(data, callback) {
 		.end(function(err, res) {
 
 			if (err) {
-				callback(agentConfig.NET_ERROR);
-			}
-			let result = res.text;
-			if (result.indexOf('学籍管理') > 0) {
-				domRequest.resText = result;
-				callback(null, result);
+				domRequest.resText = agentConfig.ERROR_INFO.NET_ERROR;
+				callback(agentConfig.ERROR_INFO.NET_ERROR);
 			} else {
-				domRequest.resText = agentConfig.NET_ERROR;
-				callback(agentConfig.NET_ERROR);
+				let result = res.text;
+				if (result.indexOf('学籍管理') > 0) {
+					domRequest.resText = result;
+					callback(null, result);
+				} else {
+					domRequest.resText = agentConfig.ERROR_INFO.NET_ERROR;
+					callback(null, agentConfig.ERROR_INFO.NET_ERROR);
+				}
 			}
 		});
 };

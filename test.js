@@ -6,10 +6,10 @@
  * Copyright (c) 2015 PUPBOSS. All rights reserved.
  */
 
-var studentAgent = require('./agent/student_agent');
-// var domAgent = require('./agent/dom_agent');
-// var cookieAgent = require('./agent/cookie_agent');
-// var agentConfig = require('./agent/agent_config');
+var studentAgent = require('./agents/student_agent');
+// var domAgent = require('./agents/dom_agent');
+// var cookieAgent = require('./agents/cookie_agent');
+// var agentConfig = require('./agents/agent_config');
 // var async = require('async');
 
 // a = { name: '语文', score: '108' };
@@ -25,6 +25,12 @@ var studentAgent = require('./agent/student_agent');
 studentAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(student) {
 	console.log(student);
 });
+
+// var a = 'html';
+
+// if ('html' == a) {
+// 	console.log('true');
+// }
 
 // domAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(html) {
 // 	console.log(html);

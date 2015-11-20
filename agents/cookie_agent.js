@@ -50,20 +50,21 @@ var getCookie = function(baseUrl, callback) {
 		.charset('gbk')
 		.end(function(err, res) {
 			if (err) {
-				account.cookie = agentConfig.NET_ERROR;
-				callback(agentConfig.NET_ERROR);
-			}
-			let result = res.redirects[0];
-
-			if (result.indexOf('frameset.jsp') > 0) {
-				result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
-				account.cookie = result;
-				callback(null, result);
+				account.cookie = agentConfig.ERROR_INFO.NET_ERROR;
+				callback(agentConfig.ERROR_INFO.NET_ERROR);
 			} else {
-				account.cookie = agentConfig.ACCOUNT_ERROR;
-				callback(agentConfig.ACCOUNT_ERROR);
+				let result = res.redirects[0];
+
+				if (result.indexOf('frameset.jsp') > 0) {
+					result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
+					account.cookie = result;
+					callback(null, result);
+				} else {
+					account.cookie = agentConfig.ERROR_INFO.ACCOUNT_ERROR;
+					callback(agentConfig.ERROR_INFO.ACCOUNT_ERROR);
+				}
 			}
-		});
+	});
 };
 
 exports.main = main;
