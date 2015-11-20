@@ -36,7 +36,7 @@ var getBaseUrl = function(callback) {
 	var urls = ['http://60.18.131.131:11080/academic/', 'http://60.18.131.131:11081/academic/', 'http://60.18.131.131:11180/academic/', 'http://60.18.131.131:11181/academic/', 'http://60.18.131.131:11080/newacademic/', 'http://60.18.131.131:11081/newacademic/', 'http://60.18.131.133:11180/newacademic/', 'http://60.18.131.133:11181/newacademic/'];
 	setTimeout(function() {
 		account.baseUrl = urls[4];
-		callback(null, urls[4]);
+		callback(null, account.baseUrl);
 	}, 100);
 };
 
@@ -51,20 +51,20 @@ var getCookie = function(baseUrl, callback) {
 		.end(function(err, res) {
 			if (err) {
 				account.cookie = agentConfig.ERROR_INFO.NET_ERROR;
-				callback(agentConfig.ERROR_INFO.NET_ERROR);
-			} else {
-				let result = res.redirects[0];
-
-				if (result.indexOf('frameset.jsp') > 0) {
-					result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
-					account.cookie = result;
-					callback(null, result);
-				} else {
-					account.cookie = agentConfig.ERROR_INFO.ACCOUNT_ERROR;
-					callback(agentConfig.ERROR_INFO.ACCOUNT_ERROR);
-				}
+				callback();
+				return;
 			}
-	});
+			let result = res.redirects[0];
+
+			if (result.indexOf('frameset.jsp') > 0) {
+				result = result.replace(baseUrl + 'frameset.jsp;jsessionid=', '');
+				account.cookie = result;
+				callback();
+				return;
+			}
+			account.cookie = agentConfig.ERROR_INFO.ACCOUNT_ERROR;
+			callback();
+		});
 };
 
 exports.main = main;

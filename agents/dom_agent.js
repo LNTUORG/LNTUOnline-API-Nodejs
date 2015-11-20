@@ -42,14 +42,15 @@ var main = function(url, userId, password, callback) {
 var getAccount = function(callback) {
 	cookieAgent.main(account.userId, account.password, function(acc) {
 		account = acc;
-		callback(null, acc);
+		callback(null, account);
 	});
 };
 
-var getDOMTypeNormal = function(data, callback) {
-	if (account.cookie == agentConfig.ERROR_INFO.ACCOUNT_ERROR) {
-		domRequest.resText = agentConfig.ERROR_INFO.ACCOUNT_ERROR;
-		callback(account.cookie);
+var getDOMTypeNormal = function(account, callback) {
+	if (account.cookie == agentConfig.ERROR_INFO.ACCOUNT_ERROR | account.cookie == agentConfig.ERROR_INFO.NET_ERROR) {
+		domRequest.resText = account.cookie;
+		callback();
+		return;
 	}
 	request
 		.get(account.baseUrl + domRequest.reqUrl)
@@ -57,20 +58,19 @@ var getDOMTypeNormal = function(data, callback) {
 		.set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
 		.charset('gbk')
 		.end(function(err, res) {
-
 			if (err) {
 				domRequest.resText = agentConfig.ERROR_INFO.NET_ERROR;
-				callback(agentConfig.ERROR_INFO.NET_ERROR);
-			} else {
-				let result = res.text;
-				if (result.indexOf('学籍管理') > 0) {
-					domRequest.resText = result;
-					callback(null, result);
-				} else {
-					domRequest.resText = agentConfig.ERROR_INFO.NET_ERROR;
-					callback(null, agentConfig.ERROR_INFO.NET_ERROR);
-				}
+				callback();
+				return;
 			}
+			let result = res.text;
+			if (result.indexOf('学籍管理') < 0) {
+				domRequest.resText = agentConfig.ERROR_INFO.NET_ERROR;
+				callback();
+				return;
+			}
+			domRequest.resText = result;
+			callback();
 		});
 };
 
