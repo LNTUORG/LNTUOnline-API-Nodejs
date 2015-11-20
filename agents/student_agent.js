@@ -15,15 +15,14 @@ var domAgent = require('./dom_agent');
 var student = require('../models/student');
 
 var info = {
-  reqUrl: '',
+  reqUrl: 'student/studentinfo/studentinfo.jsdo',
   userId: '',
   password: ''
 };
 
 var laStudent = student.Student;
 
-var main = function(url, userId, password, callback) {
-  info.reqUrl = url;
+var main = function(userId, password, callback) {
   info.userId = userId;
   info.password = password;
   async.waterfall([

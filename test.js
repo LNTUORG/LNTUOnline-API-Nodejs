@@ -6,6 +6,8 @@
  * Copyright (c) 2015 PUPBOSS. All rights reserved.
  */
 
+'use strict';
+
 var studentAgent = require('./agents/student_agent');
 // var domAgent = require('./agents/dom_agent');
 // var cookieAgent = require('./agents/cookie_agent');
@@ -22,7 +24,7 @@ var studentAgent = require('./agents/student_agent');
 // arr.push(b);
 
 // console.log(arr);
-studentAgent.main('student/studentinfo/studentinfo.jsdo', '1306030411', '0123', function(student) {
+studentAgent.main('1306030411', '0123', function(student) {
 	console.log(student);
 });
 
