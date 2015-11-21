@@ -24,7 +24,7 @@ var studentAgent = require('./agents/student_agent');
 // arr.push(b);
 
 // console.log(arr);
-studentAgent.main('1306030411', '0123', function(student) {
+studentAgent.main('1306030411', '123', function(student) {
 	console.log(student);
 });
 
@@ -59,9 +59,9 @@ studentAgent.main('1306030411', '0123', function(student) {
 
 // });
 
-// console.log(agentConfig.J_SESSIONID);
+// console.log(agentConfig.HTTP_SETTING.TIME_OUT);
 
-// cookieAgent.getCookie('1306030411', '0123', function(cookie) {
+// cookieAgent.main('1306030411', '0123', function(cookie) {
 // 	console.log(cookie)
 // });
 // agentConfig.getCurrentUrl(function(base) {

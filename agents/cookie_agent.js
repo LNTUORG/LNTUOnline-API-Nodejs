@@ -45,6 +45,7 @@ var getCookie = function(baseUrl, callback) {
 		.post(baseUrl + 'j_acegi_security_check')
 		.send('j_username=' + account.userId)
 		.send('j_password=' + account.password)
+		.timeout(agentConfig.HTTP_SETTING.TIME_OUT)
 		.set('Accept', 'application/json')
 		.set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
 		.charset('gbk')
