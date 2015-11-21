@@ -3,25 +3,35 @@
 ## Notice
 
 * **The master branch isn't a stable version but run without crash.**
-* **This project only be used for storing clean code, I have no idea if this project would got a stable version.**
+* **This project only be used for storing strong code, I have no idea if this project would got a stable version.**
 
 ## Requirements
 
 - Node.js version 5.0
 - npm
 
+## Libraries Used
+
+* async
+* cheerio
+* eventproxy
+* mongodb
+* restify
+* superagent
+* superagent-charset
+
 ## In The End
 
-If you are interest in this project, please show your code && make a PR.
+If you are interested in this project, please show your code && make a PR.
 
 ## Contact
 
 - [hi@pupboss.com](mailto:hi@pupboss.com)
-- [PUPBOSS.COM](https://www.pupboss.com)
+- [pupboss.com](https://www.pupboss.com)
 
 ## Licence
 
-```
+``` 
 Copyright (C) 2015-2016 LNTU.ORG (https://www.lntu.org)
 Copyright (C) 2013-2015 PUPBOSS (https://www.pupboss.com)
 
