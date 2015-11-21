@@ -24,9 +24,9 @@ var studentAgent = require('./agents/student_agent');
 // arr.push(b);
 
 // console.log(arr);
-studentAgent.main('1306030411', '123', function(student) {
-	console.log(student);
-});
+// studentAgent.main('1306030411', '0123', function(student) {
+// 	console.log(student);
+// });
 
 // var a = 'html';
 
