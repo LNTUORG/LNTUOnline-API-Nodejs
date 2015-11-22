@@ -31,6 +31,7 @@
     "mongodb": "^2.0.48",
     "restify": "^4.0.3",
     "superagent": "^1.4.0",
-    "superagent-charset": "^0.1.1"
+    "superagent-charset": "^0.1.1",
+    "utility": "^1.5.0"
   }
 }

@@ -8,11 +8,17 @@
 
 'use strict';
 
-var studentAgent = require('./agents/student_agent');
+// var studentAgent = require('./agents/student_agent');
+var utils = require('utility');
 // var domAgent = require('./agents/dom_agent');
 // var cookieAgent = require('./agents/cookie_agent');
 // var agentConfig = require('./agents/agent_config');
 // var async = require('async');
+
+
+var x = utils.base64encode('13060304110123');
+var y = utils.base64decode('MTMwNjAzMDQxMTAxMjM=');
+console.log(x, y);
 
 // a = { name: '语文', score: '108' };
 // b = { name: '数学', score: '106' };

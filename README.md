@@ -19,6 +19,7 @@
 * restify
 * superagent
 * superagent-charset
+* utility
 
 ## In The End
 
