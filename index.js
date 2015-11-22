@@ -20,7 +20,7 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
-routes(app);
+routes(server);
 
 server.listen(8080, function() {
 	console.log('%s listening at %s', server.name, server.url);

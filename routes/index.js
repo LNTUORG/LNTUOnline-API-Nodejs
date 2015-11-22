@@ -7,6 +7,7 @@
  */
 
 'use strict';
+var resController = require('../middlewares/res_controller');
 
 module.exports = function(server) {
 	server.get('/', function(req, res, next) {
@@ -15,7 +16,10 @@ module.exports = function(server) {
 	});
 
 	server.get('/student/:name', function(req, res, next) {
-		res.send(req.params);
+		var token = req.headers.authorization;
+		resController('student', token, function(student) {
+			res.send(student);
+		});
 		return next();
 	});
 };

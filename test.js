@@ -14,11 +14,20 @@ var utils = require('utility');
 // var cookieAgent = require('./agents/cookie_agent');
 // var agentConfig = require('./agents/agent_config');
 // var async = require('async');
+// var resController = require('./middlewares/res_controller');
 
+// resController('student', 'MTMwNjAzMDQxMTljYjdiMjVhMDk5NTVmOTExNTU5MWZlOTA0OGY1NjUzYTAzYWE0YjE=', function(student) {
+// 	console.log(student);
+// });
 
-var x = utils.base64encode('13060304110123');
-var y = utils.base64decode('MTMwNjAzMDQxMTAxMjM=');
-console.log(x, y);
+// var x = utils.sha1('13060304110123');
+// var xx = utils.base64encode('1306030411' + x);
+
+// var y = utils.base64decode('MTMwNjAzMDQxMTljYjdiMjVhMDk5NTVmOTExNTU5MWZlOTA0OGY1NjUzYTAzYWE0YjE=');
+// console.log(y);
+
+// var str = '13060304119cb7b25a09955f9115591fe9048f5653a03aa4b1';
+// console.log(str.slice(10, str.length));
 
 // a = { name: '语文', score: '108' };
 // b = { name: '数学', score: '106' };
