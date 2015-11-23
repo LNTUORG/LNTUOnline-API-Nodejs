@@ -1,9 +1,12 @@
 # Liaoning Technical University Education System Agent Server Written In Node.js
 
+This project was influenced deeply by [TakWolf's](https://github.com/TakWolf) [LNTUOnline-API](https://github.com/LNTUORG/LNTUOnline-API).
+
 ## Notice
 
-* **The master branch isn't a stable version but run without crash.**
-* **This project only be used for storing strong code, I have no idea if this project would got a stable version.**
+- **The master branch isn't a stable version but run without crash.**
+- **This project only be used for storing strong code, I have no idea if this project would got a stable version.**
+- **API may be different to the java version, so you'd better not to publish it as a production environment.**
 
 ## Requirements
 
@@ -12,14 +15,14 @@
 
 ## Libraries Used
 
-* async
-* cheerio
-* eventproxy
-* mongodb
-* restify
-* superagent
-* superagent-charset
-* utility
+- async
+- cheerio
+- eventproxy
+- mongodb
+- restify
+- superagent
+- superagent-charset
+- utility
 
 ## In The End
 

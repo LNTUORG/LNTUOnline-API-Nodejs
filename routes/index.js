@@ -15,10 +15,23 @@ module.exports = function(server) {
 		return next();
 	});
 
+  server.post('/account/login', function(req, res, next) {
+  	let target = 'login';
+  	let token = {
+  		userId: req.params.userId,
+  		password: req.params.password
+  	}
+  	resController(target, token, function(result) {
+			res.send(result.status, result.json);
+		});
+		return next();
+  });
+
 	server.get('/student/:name', function(req, res, next) {
-		var token = req.headers.authorization;
-		resController('student', token, function(student) {
-			res.send(student);
+		let target = 'student';
+		let token = req.headers.authorization;
+		resController(target, token, function(result) {
+			res.send(result.status, result.json);
 		});
 		return next();
 	});
