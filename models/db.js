@@ -13,6 +13,6 @@ var agentConfig = require('../agents/agent_config'),
 	connection = require('mongodb').Connection,
 	server = require('mongodb').Server;
 
-module.exports = new Db(settings.db, new Server(agentConfig.DB_SETTING.host, agentConfig.DB_SETTING.port), {
+module.exports = new db(agentConfig.DB_SETTING.db, new server(agentConfig.DB_SETTING.host, agentConfig.DB_SETTING.port), {
 	safe: true
 });

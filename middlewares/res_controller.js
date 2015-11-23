@@ -8,6 +8,7 @@
 
 'use strict';
 
+var dbController = require('../middlewares/db_controller');
 var studentAgent = require('../agents/student_agent');
 var cookieAgent = require('../agents/cookie_agent');
 var agentConfig = require('../agents/agent_config');
@@ -36,6 +37,16 @@ module.exports = function(target, token, callback) {
 				callback({
 					status: 200,
 					json: result
+				});
+				let user = {
+					userId: token.userId,
+					password: utils.base64encode(token.password),
+					create_at: utils.YYYYMMDDHHmmss(),
+					ip_address: token.ip_address,
+					user_agent: token.user_agent
+				};
+				dbController.insertData('user', user, function(err, res) {
+					console.log(err, res);
 				});
 				return;
 			}
