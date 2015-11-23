@@ -60,14 +60,18 @@ module.exports = function(target, token, callback) {
 		dbController.getData('user', userId, function(err, doc) {
 			if (sha1 == utils.sha1(doc.userId + utils.base64decode(doc.password))) {
 				studentAgent.main(doc.userId, utils.base64decode(doc.password), function(student) {
+					if (student == agentConfig.ERROR_INFO.ACCOUNT_ERROR | student == agentConfig.ERROR_INFO.NET_ERROR) {
+						return callback({
+							status: 403,
+							json: student
+						});
+					}
 					callback({
 						status: 200,
 						json: student
 					});
-					return;
 				});
 			}
 		});
-		return;
 	}
 };
