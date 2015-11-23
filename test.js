@@ -8,7 +8,7 @@
 
 'use strict';
 
-// var studentAgent = require('./agents/student_agent');
+var studentAgent = require('./agents/student_agent');
 var utils = require('utility');
 // var domAgent = require('./agents/dom_agent');
 // var cookieAgent = require('./agents/cookie_agent');
@@ -39,9 +39,9 @@ var utils = require('utility');
 // arr.push(b);
 
 // console.log(arr);
-// studentAgent.main('1306030411', '0123', function(student) {
-// 	console.log(student);
-// });
+studentAgent.main('1306030411', '0123', function(student) {
+	console.log(student);
+});
 
 // var a = 'html';
 

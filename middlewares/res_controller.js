@@ -54,17 +54,20 @@ module.exports = function(target, token, callback) {
 		return;
 	}
 	if (target == 'student') {
-		var decode = utils.base64decode(token);
-		var sha1 = decode.slice(10, decode.length);
-		if (sha1 == utils.sha1('1306030411' + '0123')) {
-			studentAgent.main('1306030411', '0123', function(student) {
-				callback({
-					status: 200,
-					json: student
+		let decode = utils.base64decode(token);
+		let userId = decode.slice(0, 10);
+		let sha1 = decode.slice(10, decode.length);
+		dbController.getData('user', userId, function(err, doc) {
+			if (sha1 == utils.sha1(doc.userId + utils.base64decode(doc.password))) {
+				studentAgent.main(doc.userId, utils.base64decode(doc.password), function(student) {
+					callback({
+						status: 200,
+						json: student
+					});
+					return;
 				});
-				return;
-			});
-		}
+			}
+		});
 		return;
 	}
 };
