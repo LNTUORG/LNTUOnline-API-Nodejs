@@ -9,7 +9,7 @@ var model = require('../utility/db');
 var utility = require('../utility');
 var agent = require('../agent/dom_agent');
 
-router.post('/login', function(req, res) {
+router.post('/login', function (req, res) {
   var user = {
     id: req.body['userId'],
     login_token: uuid.v4(),
@@ -29,20 +29,20 @@ router.post('/login', function(req, res) {
   res.contentType('application/json');
   agent.just_get_cookie(req.body['userId'], req.body['password'], function (err) {
     if (err) {
-      res.status(400).json({code: err, message: 'it seems something went wrong'});
+      return res.status(400).json({ code: err, message: 'it seems something went wrong' });
     }
-    model.user_model.find({ id: user.id }, function (error) {
-      if(error){
-        user.password = utility.encrypt(user.password);
+    user.password = utility.encrypt(user.password);
+    model.user_model.find({ id: user.id }, function (error, docs) {
+      if(error || docs.length < 1){
         user.create_at = new Date().toISOString();
-        user.save();
+        model.user_model.create(user, function (error, docs) {
+        });
       }else{
-        user.password = utility.encrypt(user.password);
         model.user_model.update({ id: user.id }, user, function (error, docs) {
         });
       }
     });
-    res.status(200).json({
+    return res.status(200).json({
       userId: user.id,
       loginToken: user.login_token,
       expiresAt: user.expires_at,
