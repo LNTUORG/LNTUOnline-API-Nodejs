@@ -1,37 +1,21 @@
 {
-  "name": "lntuolapiv3",
+  "name": "lntuolv3",
   "version": "1.0.0",
-  "description": "A proxy server written in Node.js",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "description": "A proxy server written in Node.js.",
+  "main": "app.js",
   "scripts": {
-    "test": "test.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LNTUORG/LNTUOnline-API-Nodejs"
-  },
-  "keywords": [
-    "LNTU",
-    "Spider"
-  ],
-  "author": "Li Jie",
+  "author": "Jay Lee",
   "license": "GPL-2.0",
-  "bugs": {
-    "url": "https://github.com/LNTUORG/LNTUOnline-API-Nodejs/issues"
-  },
-  "homepage": "https://github.com/LNTUORG/LNTUOnline-API-Nodejs#readme",
   "dependencies": {
-    "async": "^1.5.0",
-    "cheerio": "^0.19.0",
-    "eventproxy": "^0.3.4",
-    "kerberos": "0.0.17",
-    "mongodb": "^2.0.48",
-    "restify": "^4.0.3",
-    "superagent": "^1.4.0",
-    "superagent-charset": "^0.1.1",
-    "utility": "^1.5.0"
+    "async": "^1.5.2",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "express-useragent": "^0.2.4",
+    "mongoose": "^4.4.6",
+    "node-uuid": "^1.4.7",
+    "superagent": "^1.8.0",
+    "superagent-charset": "^1.0.0"
   }
 }
