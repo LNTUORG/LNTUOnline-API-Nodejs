@@ -33,11 +33,12 @@ router.post('/login', function(req, res) {
     }
     model.user_model.find({ id: user.id }, function (error) {
       if(error){
+        user.password = utility.encrypt(user.password);
         user.create_at = new Date().toISOString();
         user.save();
       }else{
+        user.password = utility.encrypt(user.password);
         model.user_model.update({ id: user.id }, user, function (error, docs) {
-
         });
       }
     });
