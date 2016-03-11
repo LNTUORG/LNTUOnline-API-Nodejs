@@ -1,7 +1,5 @@
 # Liaoning Technical University Education System Agent Server Written In Node.js
 
-This project was influenced deeply by [TakWolf's](https://github.com/TakWolf) [LNTUOnline-API](https://github.com/LNTUORG/LNTUOnline-API).
-
 ## Notice
 
 - **The master branch isn't a stable version but run without crash.**
@@ -10,19 +8,18 @@ This project was influenced deeply by [TakWolf's](https://github.com/TakWolf) [L
 
 ## Requirements
 
-- Node.js version 5.0
+- Node.js version 4.x LTS
 - npm
 
 ## Libraries Used
 
+- express
 - async
+- node-uuid
 - cheerio
-- eventproxy
-- mongodb
-- restify
+- mongoose
 - superagent
 - superagent-charset
-- utility
 
 ## In The End
 
@@ -37,7 +34,7 @@ If you are interested in this project, please show your code && make a PR.
 
 ``` 
 Copyright (C) 2015-2016 LNTU.ORG (https://www.lntu.org)
-Copyright (C) 2013-2015 PUPBOSS (https://www.pupboss.com)
+Copyright (C) 2013-2016 PUPBOSS (https://www.pupboss.com)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
