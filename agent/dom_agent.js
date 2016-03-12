@@ -66,7 +66,7 @@ var get_dom = function (cookie, callback) {
         return callback(constant.cookie.net_error, null);
       }
       var result = res.text;
-      if (result.indexOf('学籍管理') < 0) {
+      if (result.indexOf('综合教务') < 0) {
         return callback(constant.cookie.net_error, null);
       }
       callback(null, result);
