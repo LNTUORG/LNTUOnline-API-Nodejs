@@ -1,6 +1,7 @@
 /**
  * Created by pupboss on 3/12/16.
  */
+'use strict';
 
 var express = require('express');
 var router = express.Router();

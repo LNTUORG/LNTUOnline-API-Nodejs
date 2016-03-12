@@ -1,6 +1,7 @@
 /**
  * Created by pupboss on 3/11/16.
  */
+'use strict';
 
 var config = require('../config');
 var mongoose = require('mongoose');

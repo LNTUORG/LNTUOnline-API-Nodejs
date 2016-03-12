@@ -1,6 +1,7 @@
 /**
  * Created by pupboss on 3/13/16.
  */
+'use strict';
 
 var agent = require('../agent/dom_agent');
 var cheerio = require('cheerio');

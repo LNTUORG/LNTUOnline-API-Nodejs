@@ -1,6 +1,7 @@
 /**
  * Created by pupboss on 3/11/16.
  */
+'use strict';
 
 var async = require('async');
 var charset = require('superagent-charset');
@@ -9,7 +10,7 @@ var constant = require('./constant');
 charset(request);
 
 var base_url = 'http://60.18.131.131:11080/newacademic/';
-var login_url = 'http://60.18.131.131:11080/newacademic/j_acegi_security_check';
+var login_url = base_url + 'j_acegi_security_check';
 var uri = '';
 var user_id = '';
 var password = '';
