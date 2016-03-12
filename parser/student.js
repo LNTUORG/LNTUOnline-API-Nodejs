@@ -9,7 +9,7 @@ var analyse_html = function(user_id, password, target, callback) {
 
   agent.normal_agent(user_id, password, target, function (err, html) {
     if (err) {
-      callback(err, null);
+      return callback(err, null);
     }
     var student = {};
     var $ = cheerio.load(html);

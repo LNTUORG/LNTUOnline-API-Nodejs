@@ -22,7 +22,7 @@ var normal_agent = function (u_id, passwd, target, callback) {
     get_cookie,
     get_dom
   ], function (err, final) {
-    callback(err, final);
+    return callback(err, final);
   });
 };
 
@@ -69,7 +69,7 @@ var get_dom = function (cookie, callback) {
       if (result.indexOf('综合教务') < 0) {
         return callback(constant.cookie.net_error, null);
       }
-      callback(null, result);
+      return callback(null, result);
     });
 };
 
