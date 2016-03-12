@@ -2,7 +2,7 @@
  * Created by pupboss on 3/12/16.
  */
 
-var agent = require('../dom_agent');
+var agent = require('../agent/dom_agent');
 var cheerio = require('cheerio');
 
 var analyse_html = function(user_id, password, target, callback) {

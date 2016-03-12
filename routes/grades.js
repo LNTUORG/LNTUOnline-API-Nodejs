@@ -4,7 +4,7 @@
 
 var express = require('express');
 var router = express.Router();
-var parser = require('../agent/parser/grades');
+var parser = require('../parser/grades');
 
 router.get('/:name', function (req, res) {
   parser(req.lntu_user_id, req.lntu_password, 'student/queryscore/queryscore.jsdo', function (err, result) {

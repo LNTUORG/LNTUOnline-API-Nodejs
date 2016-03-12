@@ -5,7 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var model = require('../utility/db');
-var parser = require('../agent/parser/student');
+var parser = require('../parser/student');
 
 router.get('/:name', function (req, res) {
 
