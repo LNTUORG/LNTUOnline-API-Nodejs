@@ -14,9 +14,9 @@ var account = require('./routes/account');
 var student = require('./routes/student');
 var grades = require('./routes/grades');
 var unpass = require('./routes/unpass');
-//var class_table = require('./routes/class_table');
-//var exam_plan = require('./routes/exam_plan');
+var exam_plan = require('./routes/exam_plan');
 //var extra_score = require('./routes/extra_score');
+//var class_table = require('./routes/class_table');
 
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(useragent.express());
@@ -28,9 +28,9 @@ app.use(token_parser);
 app.use('/student', student);
 app.use('/grades', grades);
 app.use('/unpass-course', unpass);
-//app.use('/class-table', class_table);
-//app.use('/exam-plan', exam_plan);
+app.use('/exam-plan', exam_plan);
 //app.use('/skill-test-score', extra_score);
+//app.use('/class-table', class_table);
 
 var server = app.listen(config.port, function () {
 

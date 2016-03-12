@@ -17,7 +17,7 @@ for (var n = 1; n < temps.length; n++) {
   var index = key_set.indexOf(temps.eq(n).children('td').eq(0).text().trim());
   if (index < 0) {
     var grade = {};
-    grade.studentId = user_id;
+    grade.studentId = '';
     grade.num = temps.eq(n).children('td').eq(0).text().trim();
     grade.name = temps.eq(n).children('td').eq(1).text().trim();
     grade.serialNum = temps.eq(n).children('td').eq(2).text().trim();
