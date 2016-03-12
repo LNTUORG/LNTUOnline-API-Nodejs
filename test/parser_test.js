@@ -7,8 +7,25 @@ var fs = require('fs');
 
 var html = fs.readFileSync('/Users/pupboss/Desktop/html.html').toString();
 
+var dict = {
+  studentId: ''
+};
+var average = {
+  studentId: ''
+};
 var grades = [];
 var $ = cheerio.load(html);
+
+var average_info = $('table[class="broken_tab"]', html).eq(0).children('tr').eq(0).children('td').eq(2).text().trim();
+var average_credit = average_info.replace('你获得的平均学分绩是', '').replace('，统计时间为每学期第4周。', '').replace('毕业离校事宜、成绩单打印申请', '').trim();
+
+if (isNaN(parseFloat(average_credit))) {
+  average.value = 0;
+  average.summary = '暂时无平均学分绩信息'
+} else {
+  average.value = average_credit;
+  average.summary = '您当前的平均学分绩为：' + average_credit;
+}
 
 var temps = $('table[class="infolist_tab"]', html).eq(0).children('tr');
 var keysets = [];
@@ -55,4 +72,4 @@ for (var n = 1; n < temps.length; n++) {
   grades.push(grade);
 }
 
-console.log(grades);
+console.log(average_credit);

@@ -12,7 +12,7 @@ router.get('/:name', function (req, res) {
     if (err) {
       return res.status(400).json({ code: err, message: 'it seems something went wrong' });
     }
-    parser(final, function (result) {
+    parser(req.lntu_user_id, final, function (result) {
       return res.status(200).json(result);
     });
   });
