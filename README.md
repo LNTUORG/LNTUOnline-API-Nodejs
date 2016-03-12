@@ -3,8 +3,18 @@
 ## Notice
 
 - **The master branch isn't a stable version but run without crash.**
-- **This project only be used for storing strong code, I have no idea if this project would got a stable version.**
 - **API may be different to the java version, so you'd better not to publish it as a production environment.**
+
+## Features
+
+- [x] Login
+- [x] Get student info by token
+- [ ] Get class table info by token
+- [ ] Get unpass courses info by token
+- [ ] Get grades info by token
+- [ ] Get exam plans by token
+
+For more details, please read [API.md](API.md).
 
 ## Requirements
 
