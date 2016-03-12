@@ -4,6 +4,7 @@
 
 var agent = require('../agent/dom_agent');
 var cheerio = require('cheerio');
+var moment = require('moment');
 
 var analyse_html = function(user_id, password, target, callback) {
 
@@ -26,15 +27,15 @@ var analyse_html = function(user_id, password, target, callback) {
     student.entranceExamArea = $('td', html)[18].children[0].data.trim();
     student.entranceExamNum = $('td', html)[20].children[0].data.trim();
     student.foreignLanguage = $('td', html)[22].children[0].data.trim();
-    student.admissionTime = $('td', html)[24].children[0].data.trim();
-    student.graduationTime = $('td', html)[26].children[0].data.trim();
+    student.admissionTime = moment($('td', html)[24].children[0].data.trim()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    student.graduationTime = moment($('td', html)[26].children[0].data.trim()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
     student.homeAddress = $('td', html)[28].children[0].data.trim();
     student.tel = $('td', html)[30].children[0].data.trim();
     student.studentInfoTableNum = $('td', html)[32].children[0].data.trim();
     student.whereaboutsAftergraduation = $('td', html)[34].children[0].data.trim();
     student.nationality = $('td', html)[2].children[0].data.trim();
     student.birthplace = $('td', html)[5].children[0].data.trim();
-    student.birthday = $('td', html)[7].children[0].data.trim();
+    student.birthday = moment($('td', html)[7].children[0].data.trim()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
     student.politicalAffiliation = $('td', html)[9].children[0].data.trim();
     student.travelRange = $('td', html)[11].children[0].data.trim();
     student.nation = $('td', html)[13].children[0].data.trim();
@@ -69,8 +70,8 @@ var analyse_html = function(user_id, password, target, callback) {
     for (n = 1; n < edus.length; n++) {
       var educationExperience = {};
 
-      educationExperience.startTime = edus.eq(n).children('td').eq(0).text().trim();
-      educationExperience.endTime = edus.eq(n).children('td').eq(1).text().trim();
+      educationExperience.startTime = moment(edus.eq(n).children('td').eq(0).text().trim()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+      educationExperience.endTime = moment(edus.eq(n).children('td').eq(1).text().trim()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
       educationExperience.schoolInfo = edus.eq(n).children('td').eq(2).text().trim();
       educationExperience.witness = edus.eq(n).children('td').eq(3).text().trim();
       student.educationExperiences.push(educationExperience);
