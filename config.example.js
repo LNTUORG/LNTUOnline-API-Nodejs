@@ -9,11 +9,7 @@ var config = {
   secret_key: 'xxxx',
 
   db: {
-    uri: 'mongodb://localhost:27017/lntuonlinev2',
-    database: 'lntuonlinev2',
-    port: 27017,
-    username: 'root',
-    password: '123'
+    uri: 'mongodb://root:123@localhost:27017/lntuonlinev2'
   },
   mail: {
     enable: true,
