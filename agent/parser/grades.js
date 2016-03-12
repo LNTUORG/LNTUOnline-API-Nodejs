@@ -32,8 +32,25 @@ var analyse_html = function(html, callback) {
     grade.testMode = temps.eq(n).children('td').eq(5).text().trim();
     grade.selectType = temps.eq(n).children('td').eq(6).text().trim();
     grade.remarks = temps.eq(n).children('td').eq(7).text().trim();
-    grade.level = temps.eq(n).children('td').eq(10).text().trim();
 
+    var s = parseFloat(grade.score);
+    if (isNaN(s)) {
+      if (grade.score == '优秀' || grade.score == '优') {
+        grade.level = 'GREAT';
+      } else if (grade.score == '差' || grade.score == '下' || grade.score == '不及格' || grade.score == '不合格' || grade.score == '无成绩' || grade.score == '') {
+        grade.level = 'UNPASS';
+      } else  {
+        grade.level = 'NORMAL';
+      }
+    } else {
+      if (s >= 90) {
+        grade.level = 'GREAT';
+      } else if (s >= 60) {
+        grade.level = 'NORMAL';
+      } else {
+        grade.level = 'UNPASS';
+      }
+    }
     grades.push(grade);
   }
   callback(grades);
