@@ -20,6 +20,7 @@ var exam_plan = require('./routes/exam_plan');
 var extra_score = require('./routes/extra_score');
 var class_table = require('./routes/class_table');
 var course_eva = require('./routes/course_eva');
+var feedback = require('./routes/feedback');
 
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(useragent.express());
@@ -36,6 +37,7 @@ app.use('/exam-plan/:id', exam_plan);
 app.use('/skill-test-score/:id', extra_score);
 app.use('/class-table/:id', class_table);
 app.use('/course-eva-info/:id', course_eva);
+app.use('/feedback', feedback);
 
 var server = app.listen(config.port, function () {
 

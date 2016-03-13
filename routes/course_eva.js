@@ -14,18 +14,9 @@ router.get('/', function (req, res) {
     }
     return res.status(200).json(result);
   });
-
 });
 
 //router.get('/do:eva', function (req, res) {
-//  //parser(req.lntu_user_id, req.lntu_password, 'student/exam/index.jsdo', function (err, result) {
-//  //  if (err) {
-//  //    return res.status(400).json({ code: err, message: 'it seems something went wrong' });
-//  //  }
-//  //  return res.status(200).json(result);
-//  //});
-//  console.log('haha');
-//  return res.status(200).json({ name: 'haha' });
 //});
 
 module.exports = router;
