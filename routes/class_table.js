@@ -7,7 +7,7 @@ var express = require('express');
 var router = express.Router();
 var parser = require('../parser/class_table');
 
-router.get('/:name', function (req, res) {
+router.get('/', function (req, res) {
   var year = parseInt(req.query['year']);
 
   if (req.query['term'] != '春' && req.query['term'] != '秋' || isNaN(year)) {

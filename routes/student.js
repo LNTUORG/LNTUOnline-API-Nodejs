@@ -8,7 +8,7 @@ var router = express.Router();
 var model = require('../utility/db');
 var parser = require('../parser/student');
 
-router.get('/:name', function (req, res) {
+router.get('/', function (req, res) {
 
   parser(req.lntu_user_id, req.lntu_password, 'student/studentinfo/studentinfo.jsdo', function (err, result) {
     if (err) {
