@@ -15,7 +15,7 @@ var analyse_html = function(user_id, password, year, term, target, callback) {
   target = target + '?year=' + y + '&term=' + t;
 
   agent.normal_agent(user_id, password, target, function (err, html) {
-    console.log(target);
+
     if (err) {
       return callback(err, null);
     }
