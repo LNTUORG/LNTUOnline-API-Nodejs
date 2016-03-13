@@ -8,7 +8,12 @@ var router = express.Router();
 var parser = require('../parser/class_table');
 
 router.get('/:name', function (req, res) {
-  parser(req.lntu_user_id, req.lntu_password, req.query['year'], req.query['term'], 'student/currcourse/currcourse.jsdo', function (err, result) {
+  var year = parseInt(req.query['year']);
+
+  if (req.query['term'] != '春' && req.query['term'] != '秋') {
+    return res.status(400).json({ code: 'Param Error', message: '参数不正确' });
+  }
+  parser(req.lntu_user_id, req.lntu_password, year, req.query['term'], 'student/currcourse/currcourse.jsdo', function (err, result) {
     if (err) {
       return res.status(400).json({ code: err, message: 'it seems something went wrong' });
     }

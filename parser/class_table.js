@@ -10,7 +10,7 @@ var config = require('../config');
 
 var analyse_html = function(user_id, password, year, term, target, callback) {
 
-  var y = (parseInt(year) - 1980);
+  var y = parseInt(year) - 1980;
   var t = term == '春' ? 1 : 2;
   target = target + '?year=' + y + '&term=' + t;
 
@@ -23,10 +23,10 @@ var analyse_html = function(user_id, password, year, term, target, callback) {
 
     var temps = $('table[class="infolist_tab"]', html).eq(0).children('tr');
     var dict = {
-      studentId: '',
-      firstWeekMondayAt: 'config.first_week_monday',
-      year: 2015,
-      term: 1,
+      studentId: user_id,
+      firstWeekMondayAt: config.first_week_monday,
+      year: year,
+      term: term,
       courses: []
     };
 
