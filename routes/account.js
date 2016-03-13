@@ -9,6 +9,7 @@ var uuid = require('node-uuid');
 var model = require('../utility/db');
 var utility = require('../utility');
 var agent = require('../agent/dom_agent');
+var constant = require('../agent/constant');
 
 router.post('/login', function (req, res) {
   var user = {
@@ -29,8 +30,10 @@ router.post('/login', function (req, res) {
   }
   res.contentType('application/json');
   agent.just_get_cookie(req.body['userId'], req.body['password'], function (err) {
-    if (err) {
-      return res.status(400).json({ code: err, message: 'it seems something went wrong' });
+    if (err == constant.cookie.user_error) {
+      return res.status(400).json({ code: err, message: 'password error' });
+    } else if (err == constant.cookie.net_error) {
+      return res.status(500).json({ code: err, message: 'The server may be down.' });
     }
     user.password = utility.encrypt(user.password);
     model.user_model.find({ id: user.id }, function (error, docs) {

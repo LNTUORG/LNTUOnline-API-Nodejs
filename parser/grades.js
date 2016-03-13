@@ -13,10 +13,10 @@ var analyse_html = function(user_id, password, target, callback) {
       return callback(err, null);
     }
     var dict = {
-      studentId: user_id
-    };
-    var average = {
-      studentId: user_id
+      studentId: user_id,
+      averageCredit: {
+        studentId: user_id
+      }
     };
     var grades = [];
     var $ = cheerio.load(html);
@@ -25,14 +25,12 @@ var analyse_html = function(user_id, password, target, callback) {
     var average_credit = average_info.replace('你获得的平均学分绩是', '').replace('，统计时间为每学期第4周。', '').replace('毕业离校事宜、成绩单打印申请', '').trim();
 
     if (isNaN(parseFloat(average_credit))) {
-      average.value = 0;
-      average.summary = '暂时无平均学分绩信息'
+      dict.averageCredit.value = 0;
+      dict.averageCredit.summary = '暂时无平均学分绩信息'
     } else {
-      average.value = average_credit;
-      average.summary = '您当前的平均学分绩为：' + average_credit;
+      dict.averageCredit.value = average_credit;
+      dict.averageCredit.summary = '您当前的平均学分绩为：' + average_credit;
     }
-
-    dict.averageCredit = average;
 
     var temps = $('table[class="infolist_tab"]', html).eq(0).children('tr');
     var keysets = [];
@@ -58,6 +56,7 @@ var analyse_html = function(user_id, password, target, callback) {
       grade.testMode = temps.eq(n).children('td').eq(5).text().trim();
       grade.selectType = temps.eq(n).children('td').eq(6).text().trim();
       grade.remarks = temps.eq(n).children('td').eq(7).text().trim();
+      grade.studentId = user_id;
 
       var s = parseFloat(grade.score);
       if (isNaN(s)) {

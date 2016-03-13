@@ -7,6 +7,7 @@ var config = require('./config');
 var express = require('express');
 var useragent = require('express-useragent');
 var body_parser = require('body-parser');
+var compression = require('compression');
 var token_parser = require('./middleware/token_parser');
 var url_parser = require('./middleware/url_parser');
 var app = express();
@@ -25,6 +26,7 @@ var appl = require('./routes/application');
 
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(useragent.express());
+app.use(compression());
 
 app.use('/', index);
 app.use('/account', account);
