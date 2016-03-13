@@ -56,6 +56,7 @@ var analyse_html = function(user_id, password, target, callback) {
       grade.testMode = temps.eq(n).children('td').eq(5).text().trim();
       grade.selectType = temps.eq(n).children('td').eq(6).text().trim();
       grade.remarks = temps.eq(n).children('td').eq(7).text().trim();
+      grade.studentId = user_id;
 
       var s = parseFloat(grade.score);
       if (isNaN(s)) {
