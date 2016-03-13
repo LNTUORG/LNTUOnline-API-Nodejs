@@ -18,15 +18,17 @@ router.post('/crash-log', function (req, res) {
   });
   crash.save();
 
-  var subj = '';
-  subj = subj.concat('【教务在线2.0 ', config.server_name, '】客户端异常');
-  var content = '时间: ' + moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ') +
-    '\n\n尾巴: ' + req.useragent['source'] +
-    '\n\n学号: ' + req.body['userId'] +
-    '\n\n内容: ' + req.body['content'];
+  if (config.mail.enable) {
+    var subj = '';
+    subj = subj.concat('【教务在线2.0 ', config.server_name, '】客户端异常');
+    var content = '时间: ' + moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ') +
+      '\n\n尾巴: ' + req.useragent['source'] +
+      '\n\n学号: ' + req.body['userId'] +
+      '\n\n内容: ' + req.body['content'];
 
-  mail(subj, content, function (err, final) {
-  });
+    mail(subj, content, function (err, final) {
+    });
+  }
   return res.status(204).send();
 });
 
@@ -42,15 +44,17 @@ router.post('/advice', function (req, res) {
   });
   advice.save();
 
-  var subj = '';
-  subj = subj.concat('【教务在线2.0 ', config.server_name, '】用户反馈');
-  var content = '时间: ' + moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ') +
-    '\n\n尾巴: ' + req.useragent['source'] +
-    '\n\n学号: ' + req.lntu_user_id +
-    '\n\n内容: ' + req.body['content'];
+  if (config.mail.enable) {
+    var subj = '';
+    subj = subj.concat('【教务在线2.0 ', config.server_name, '】用户反馈');
+    var content = '时间: ' + moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ') +
+      '\n\n尾巴: ' + req.useragent['source'] +
+      '\n\n学号: ' + req.lntu_user_id +
+      '\n\n内容: ' + req.body['content'];
 
-  mail(subj, content, function (err, final) {
-  });
+    mail(subj, content, function (err, final) {
+    });
+  }
   return res.status(204).send();
 });
 
