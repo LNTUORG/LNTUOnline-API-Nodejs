@@ -16,6 +16,7 @@
     "async": "^1.5.2",
     "body-parser": "^1.15.0",
     "cheerio": "^0.20.0",
+    "eventproxy": "^0.3.4",
     "express": "^4.13.4",
     "express-useragent": "^0.2.4",
     "moment": "^2.12.0",
