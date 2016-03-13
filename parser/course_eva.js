@@ -21,9 +21,9 @@ var analyse_html = function(user_id, password, target, callback) {
       var eva = {};
       eva.studentId = user_id;
       eva.teacher = temps.eq(n).children('td').eq(0).text().trim();
-      var course_str = temps.eq(n).children('td').eq(1).text().trim();
-      eva.name = course_str.split('(', 2)[0];
-      eva.num = course_str.split('(', 2)[1].replace(')', '');
+      var course_str = temps.eq(n).children('td').eq(1).text().trim().replace('(', '\n').replace(')', '').split("\n");
+      eva.name = course_str[0];
+      eva.num = course_str[1];
       eva.done = temps.eq(n).children('td').eq(2).text().trim() == '已评估';
       if (!eva.done) {
         eva.url = temps.eq(n).children('td').eq(3).text().trim();
