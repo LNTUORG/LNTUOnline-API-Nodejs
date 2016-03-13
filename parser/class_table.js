@@ -50,10 +50,11 @@ var analyse_html = function(user_id, password, year, term, target, callback) {
         var week_str = times.eq(m).children('td').eq(0).text().trim().replace('单', '').replace('双', '');
         var start_week = '';
         var end_week = '';
-        if (week_str != '-') {
-          start_week = week_str.split('-', 2)[0];
-          end_week = week_str.split('-', 2)[1];
+        if (week_str == '-') {
+          continue;
         }
+        start_week = week_str.split('-', 2)[0];
+        end_week = week_str.split('-', 2)[1];
         var week_mode = '';
         if (times.eq(m).children('td').eq(0).text().trim().indexOf('单') >= 0) {
           week_mode = 'ODD';
