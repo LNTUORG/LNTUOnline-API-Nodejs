@@ -1,6 +1,7 @@
 /**
  * Created by pupboss on 3/11/16.
  */
+'use strict';
 
 var model = require('../utility/db');
 var utility = require('../utility');

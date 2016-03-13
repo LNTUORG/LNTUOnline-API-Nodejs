@@ -9,10 +9,11 @@
 
 - [x] Login
 - [x] Get student info by token
-- [ ] Get class table info by token
-- [ ] Get unpass courses info by token
-- [ ] Get grades info by token
-- [ ] Get exam plans by token
+- [x] Get class table info by token
+- [x] Get unpass courses info by token
+- [x] Get grades info by token
+- [x] Get exam plans by token
+- [x] ...All same to the Java version
 
 For more details, please read [API.md](API.md).
 
@@ -30,6 +31,7 @@ For more details, please read [API.md](API.md).
 - mongoose
 - superagent
 - superagent-charset
+- node-uuid
 
 ## In The End
 

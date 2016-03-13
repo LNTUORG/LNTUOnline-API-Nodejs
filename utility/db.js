@@ -1,9 +1,11 @@
 /**
  * Created by pupboss on 3/11/16.
  */
+'use strict';
 
 var config = require('../config');
 var mongoose = require('mongoose');
+var uuid = require('node-uuid');
 var db = mongoose.connect(config.db.uri);
 
 db.connection.on("error", function (error) {
@@ -32,10 +34,22 @@ var user_detail_schema = new mongoose.Schema({
   update_at: { type: Date }
 });
 
+var feedback_schema = new mongoose.Schema({
+  id: { type: String, default: uuid.v4() },
+  user_id: { type: String },
+  create_at: { type: Date, default: Date.now() },
+  user_agent: { type: String },
+  content: { type: String }
+});
+
 var user_model = db.model('user', user_schema);
 var user_detail_model = db.model('user_detail', user_detail_schema);
+var crash_log_model = db.model('crash_log', feedback_schema);
+var advice_model = db.model('advices', feedback_schema);
 
 module.exports = {
   user_model: user_model,
-  user_detail_model: user_detail_model
+  user_detail_model: user_detail_model,
+  crash_log_model: crash_log_model,
+  advice_model: advice_model
 };

@@ -1,6 +1,7 @@
 /**
  * Created by pupboss on 3/11/16.
  */
+'use strict';
 
 var async = require('async');
 var charset = require('superagent-charset');
@@ -9,7 +10,7 @@ var constant = require('./constant');
 charset(request);
 
 var base_url = 'http://60.18.131.131:11080/newacademic/';
-var login_url = 'http://60.18.131.131:11080/newacademic/j_acegi_security_check';
+var login_url = base_url + 'j_acegi_security_check';
 var uri = '';
 var user_id = '';
 var password = '';
@@ -22,7 +23,7 @@ var normal_agent = function (u_id, passwd, target, callback) {
     get_cookie,
     get_dom
   ], function (err, final) {
-    callback(err, final);
+    return callback(err, final);
   });
 };
 
@@ -66,10 +67,10 @@ var get_dom = function (cookie, callback) {
         return callback(constant.cookie.net_error, null);
       }
       var result = res.text;
-      if (result.indexOf('学籍管理') < 0) {
+      if (result.indexOf('综合教务') < 0) {
         return callback(constant.cookie.net_error, null);
       }
-      callback(null, result);
+      return callback(null, result);
     });
 };
 
