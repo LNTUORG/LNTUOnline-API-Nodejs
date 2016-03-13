@@ -8,6 +8,10 @@
   },
   "author": "Jay Lee",
   "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pupboss/LNTUOnline-API-Nodejs.git"
+  },
   "dependencies": {
     "async": "^1.5.2",
     "body-parser": "^1.15.0",
