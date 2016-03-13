@@ -5,8 +5,9 @@
 
 var constant = {
   cookie: {
-    net_error: 'NET_ERROR',
-    user_error: 'PASSWORD_ERROR'
+    net_error: 'REMOTE_INVOKE_ERROR',
+    user_error: 'PASSWORD_ERROR',
+    auth_error: 'AUTH_ERROR'
   },
   urls: [
     'http://60.18.131.131:11080/academic/',

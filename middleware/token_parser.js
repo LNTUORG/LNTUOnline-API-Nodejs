@@ -5,6 +5,7 @@
 
 var model = require('../utility/db');
 var utility = require('../utility');
+var constant = require('../agent/constant');
 
 module.exports = function (req, res, next) {
 
@@ -14,9 +15,9 @@ module.exports = function (req, res, next) {
     req.lntu_type = '';
 
     if (error || docs.length < 1){
-      res.status(401).json({ code: 'Expired', message: 'Please re-login to get a new token' });
+      res.status(401).json({ code: constant.cookie.auth_error, message: 'Authorization is null or is expires.' });
     } else if (docs[0]['expires_at'] < new Date()) {
-      res.status(401).json({ code: 'Expired', message: 'Please re-login to get a new token' });
+      res.status(401).json({ code: constant.cookie.auth_error, message: 'Authorization is null or is expires.' });
     } else {
       req.lntu_type = docs[0]['type'];
       req.lntu_password = utility.decrypt(docs[0]['password']);

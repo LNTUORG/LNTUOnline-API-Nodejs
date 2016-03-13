@@ -29,7 +29,7 @@ var normal_agent = function (u_id, passwd, target, callback) {
     get_cookie,
     get_dom
   ], function (err, final) {
-    return callback(err, final);
+    return callback(constant.cookie.net_error, final);
   });
 };
 
