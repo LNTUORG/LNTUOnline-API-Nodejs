@@ -33,7 +33,7 @@ student.studentInfoTableNum = temps.eq(15).children('td').eq(0).text().trim();
 student.whereaboutsAftergraduation = temps.eq(16).children('td').eq(0).text().trim();
 student.remarks = temps.eq(17).children('td').eq(0).text().trim();
 student.nationality = temps.eq(0).children('td').eq(1).text().trim();
-student.photoUrl = $('img', html)[0].attribs.src;
+student.photoUrl = temps.eq(0).children('td').eq(2).children('img').attr('src');
 student.birthplace = temps.eq(1).children('td').eq(1).text().trim();
 student.birthday = moment(temps.eq(2).children('td').eq(1).text().trim()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 student.politicalAffiliation = temps.eq(3).children('td').eq(1).text().trim();
@@ -51,4 +51,4 @@ student.email = temps.eq(14).children('td').eq(1).text().trim();
 student.sourceOfStudent = temps.eq(15).children('td').eq(1).text().trim();
 
 
-console.log(student);
+console.log(student.photoUrl);
