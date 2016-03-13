@@ -11,8 +11,10 @@ var parser = require('../parser/student');
 router.get('/', function (req, res) {
 
   parser(req.lntu_user_id, req.lntu_password, 'student/studentinfo/studentinfo.jsdo', function (err, result) {
-    if (err) {
-      return res.status(400).json({ code: err, message: 'it seems something went wrong' });
+    if (err == constant.cookie.user_error) {
+      return res.status(400).json({ code: err, message: 'password error' });
+    } else if (err == constant.cookie.net_error) {
+      return res.status(500).json({ code: err, message: 'The server may be down.' });
     }
     model.user_detail_model.find({ id: result['id'] }, function (error, docs) {
       var user_detail = {

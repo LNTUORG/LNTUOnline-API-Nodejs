@@ -31,11 +31,8 @@ router.post('/login', function (req, res) {
   res.contentType('application/json');
   agent.just_get_cookie(req.body['userId'], req.body['password'], function (err) {
     if (err == constant.cookie.user_error) {
-
       return res.status(400).json({ code: err, message: 'password error' });
-
     } else if (err == constant.cookie.net_error) {
-
       return res.status(500).json({ code: err, message: 'The server may be down.' });
     }
     user.password = utility.encrypt(user.password);

@@ -9,6 +9,7 @@ var moment = require('moment');
 var config = require('../config');
 var mail = require('../utility/mail');
 var model = require('../utility/db');
+var constant = require('../agent/constant');
 
 router.post('/crash-log', function (req, res) {
   var crash = new model.crash_log_model({
@@ -35,7 +36,7 @@ router.post('/crash-log', function (req, res) {
 router.post('/advice', function (req, res) {
 
   if (req.body['content'] == '') {
-    return res.status(400).json({ code: 'ARGS_ERROR', message: 'it seems something went wrong' });
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var advice = new model.advice_model({
     user_id: req.lntu_user_id,
