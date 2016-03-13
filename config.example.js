@@ -14,10 +14,12 @@ var config = {
   },
   mail: {
     enable: true,
-    smtp: 'smtp.x.com',
-    from: 'xxx@xx.com',
-    username: 'xxx@xx.com',
-    password: 'xxxxx'
+    host: 'smtp.126.com',
+    port: 465,
+    user: 'xxxx@126.com',
+    pass: 'xxxx',
+    from: 'LNTUOnline <xxxx@126.com>',
+    to: 'xxxx@xxx.xxx, xxxx@xxxx.xx'
   },
   admin: {
     enable: true,
