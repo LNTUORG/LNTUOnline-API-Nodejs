@@ -22,13 +22,19 @@ var analyse_html = function(user_id, password, target, callback) {
       var plan = {};
       plan.studentId = user_id;
       plan.course = temps.eq(n).children('td').eq(0).text().trim();
-      var time_str_arr = temps.eq(n).children('td').eq(1).text().trim().split(' ');
-      console.log(plan.course, temps.eq(n).children('td').eq(1).text().trim());
-      console.log(time_str_arr);
-      var arr1 = time_str_arr[1].split('--');
-      var time_str = time_str_arr[0];
-      plan.startTime = moment(time_str + 'T' + arr1[0] + '+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-      plan.endTime = moment(time_str + 'T' + arr1[1] + '+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+
+      try {
+        var time_str_arr = temps.eq(n).children('td').eq(1).text().trim().split(' ');
+        var arr1 = time_str_arr[1].split('--');
+        var time_str = time_str_arr[0];
+        plan.startTime = moment(time_str + 'T' + arr1[0] + '+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+        plan.endTime = moment(time_str + 'T' + arr1[1] + '+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+      } catch (err) {
+        console.log(err);
+        plan.startTime = moment('1970-01-01T00:00+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+        plan.endTime = moment('1970-01-01T00:00+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+      }
+
       plan.location = temps.eq(n).children('td').eq(2).text().trim();
       plans.push(plan);
     }
