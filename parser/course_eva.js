@@ -30,7 +30,7 @@ var analyse_html = function(user_id, password, target, callback) {
       }
       evas.push(eva);
     }
-    callback(null, evas);
+    return callback(null, evas);
   });
 };
 

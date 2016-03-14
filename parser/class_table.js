@@ -109,7 +109,7 @@ var analyse_html = function(user_id, password, year, term, target, callback) {
       }
       dict.courses.push(course);
     }
-    callback(null, dict);
+    return callback(null, dict);
   });
 };
 

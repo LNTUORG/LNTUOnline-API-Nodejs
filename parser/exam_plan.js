@@ -38,7 +38,7 @@ var analyse_html = function(user_id, password, target, callback) {
       plan.location = temps.eq(n).children('td').eq(2).text().trim();
       plans.push(plan);
     }
-    callback(null, plans);
+    return callback(null, plans);
   });
 };
 

@@ -36,7 +36,7 @@ var normal_agent = function (u_id, passwd, target, callback) {
 var just_get_cookie = function (u_id, passwd, callback) {
   user_id = u_id;
   password = passwd;
-  get_cookie(callback);
+  return get_cookie(callback);
 };
 
 var get_cookie = function (callback) {
@@ -126,7 +126,7 @@ var test_speed = function (callback) {
     subj = subj.concat('【教务在线2.0 ', config.server_name, '】维护日志');
     mail(subj, content, function(err, final) {
     });
-    callback(content);
+    return callback(content);
   });
 
 

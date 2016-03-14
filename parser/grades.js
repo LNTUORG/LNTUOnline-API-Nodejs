@@ -79,7 +79,7 @@ var analyse_html = function(user_id, password, target, callback) {
       grades.push(grade);
     }
     dict.courseScores = grades;
-    callback(null, dict);
+    return callback(null, dict);
   });
 };
 

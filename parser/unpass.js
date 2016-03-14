@@ -53,7 +53,7 @@ var analyse_html = function(user_id, password, target, callback) {
         grades[index].records.push(record2);
       }
     }
-    callback(null, grades);
+    return callback(null, grades);
   });
 };
 

@@ -97,7 +97,7 @@ var analyse_html = function(user_id, password, target, callback) {
 
       student.familys.push(family);
     }
-    callback(null, student);
+    return callback(null, student);
   });
 };
 

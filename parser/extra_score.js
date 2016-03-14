@@ -25,7 +25,7 @@ var analyse_html = function(user_id, password, target, callback) {
       score.score = temps.eq(n).children('td').eq(2).text().trim();
       scores.push(score);
     }
-    callback(null, scores);
+    return callback(null, scores);
   });
 };
 
