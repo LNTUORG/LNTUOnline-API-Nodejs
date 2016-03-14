@@ -13,7 +13,7 @@ var mail = require('../utility/mail');
 
 charset(request);
 
-var base_url_index = 2;
+var base_url_index = 4;
 
 var normal_agent = function (u_id, passwd, target, callback) {
 
