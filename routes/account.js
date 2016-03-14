@@ -22,7 +22,6 @@ router.post('/login', function (req, res) {
     ip_address: req.ip,
     user_agent: req.useragent['source']
   };
-  console.log(user);
   if (req.body['userId'].length == 10) {
     user.type = 'STUDENT'
   } else {

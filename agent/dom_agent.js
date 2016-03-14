@@ -13,7 +13,7 @@ var mail = require('../utility/mail');
 
 charset(request);
 
-var base_url_index = 4;
+var base_url_index = 2;
 
 var normal_agent = function (u_id, passwd, target, callback) {
 
@@ -29,7 +29,6 @@ var normal_agent = function (u_id, passwd, target, callback) {
 };
 
 var get_cookie = function (u_id, passwd, callback) {
-  console.log(constant.urls[base_url_index] + 'j_acegi_security_check');
   request
     .post(constant.urls[base_url_index] + 'j_acegi_security_check')
     .send('j_username=' + u_id)
