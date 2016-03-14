@@ -8,7 +8,7 @@ var cheerio = require('cheerio');
 var moment = require('moment');
 var config = require('../config');
 
-var analyse_html = function(user_id, password, year, term, target, callback) {
+var analyse_class = function(user_id, password, year, term, target, callback) {
 
   var y = parseInt(year) - 1980;
   var t = term == '春' ? 1 : 2;
@@ -21,8 +21,8 @@ var analyse_html = function(user_id, password, year, term, target, callback) {
     }
     var $ = cheerio.load(html);
 
-    var temps = $('table[class="infolist_tab"]', html).eq(0).children('tr');
-    var dict = {
+    var class_temp = $('table[class="infolist_tab"]', html).eq(0).children('tr');
+    var class_dict = {
       studentId: user_id,
       firstWeekMondayAt: config.first_week_monday,
       year: year,
@@ -30,20 +30,20 @@ var analyse_html = function(user_id, password, year, term, target, callback) {
       courses: []
     };
 
-    for (var n = 1; n < temps.length; n++) {
+    for (var n = 1; n < class_temp.length; n++) {
       var course = {
-        num: temps.eq(n).children('td').eq(0).text().trim(),
-        serialNum: temps.eq(n).children('td').eq(1).text().trim(),
-        name: temps.eq(n).children('td').eq(2).text().trim(),
-        teacher: temps.eq(n).children('td').eq(3).text().trim(),
-        credit: temps.eq(n).children('td').eq(4).text().trim(),
-        selectType: temps.eq(n).children('td').eq(5).text().trim(),
-        testMode: temps.eq(n).children('td').eq(6).text().trim(),
-        examType: temps.eq(n).children('td').eq(7).text().trim(),
+        num: class_temp.eq(n).children('td').eq(0).text().trim(),
+        serialNum: class_temp.eq(n).children('td').eq(1).text().trim(),
+        name: class_temp.eq(n).children('td').eq(2).text().trim(),
+        teacher: class_temp.eq(n).children('td').eq(3).text().trim(),
+        credit: class_temp.eq(n).children('td').eq(4).text().trim(),
+        selectType: class_temp.eq(n).children('td').eq(5).text().trim(),
+        testMode: class_temp.eq(n).children('td').eq(6).text().trim(),
+        examType: class_temp.eq(n).children('td').eq(7).text().trim(),
         timesAndPlaces: []
       };
 
-      var times = $('table[class="none"]', temps.eq(n)).eq(0).children('tr');
+      var times = $('table[class="none"]', class_temp.eq(n)).eq(0).children('tr');
 
       //console.log(times.length);
       for (var m = 0; m < times.length; m++) {
@@ -107,10 +107,10 @@ var analyse_html = function(user_id, password, year, term, target, callback) {
         };
         course.timesAndPlaces.push(time);
       }
-      dict.courses.push(course);
+      class_dict.courses.push(course);
     }
-    return callback(null, dict);
+    return callback(null, class_dict);
   });
 };
 
-module.exports = analyse_html;
+module.exports = analyse_class;
