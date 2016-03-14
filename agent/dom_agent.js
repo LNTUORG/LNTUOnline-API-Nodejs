@@ -14,8 +14,6 @@ var mail = require('../utility/mail');
 charset(request);
 
 var base_url_index = 4;
-var base_url = constant.urls[base_url_index];
-var login_url = base_url + 'j_acegi_security_check';
 
 var normal_agent = function (u_id, passwd, target, callback) {
 
@@ -31,8 +29,9 @@ var normal_agent = function (u_id, passwd, target, callback) {
 };
 
 var get_cookie = function (u_id, passwd, callback) {
+  console.log(constant.urls[base_url_index] + 'j_acegi_security_check');
   request
-    .post(login_url)
+    .post(constant.urls[base_url_index] + 'j_acegi_security_check')
     .send('j_username=' + u_id)
     .send('j_password=' + passwd)
     .timeout(3000)
@@ -45,7 +44,7 @@ var get_cookie = function (u_id, passwd, callback) {
       }
       var result = res.redirects[0];
       if (result.indexOf('frameset.jsp') > 0) {
-        result = result.replace(base_url + 'frameset.jsp;jsessionid=', '');
+        result = result.replace(constant.urls[base_url_index] + 'frameset.jsp;jsessionid=', '');
         return callback(null, result);
       } else {
         return callback(constant.cookie.user_error, null);
@@ -55,7 +54,7 @@ var get_cookie = function (u_id, passwd, callback) {
 
 var get_dom = function (target, cookie, callback) {
   request
-    .get(base_url + target)
+    .get(constant.urls[base_url_index] + target)
     .set('Cookie', 'JSESSIONID=' + cookie + '; AJSTAT_ok_times=1')
     .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
     .charset('gbk')
@@ -86,7 +85,7 @@ var net_speed = function (u_id, passwd, url, callback) {
       }
       var result = res.redirects[0];
       if (result.indexOf('frameset.jsp') > 0) {
-        result = result.replace(base_url + 'frameset.jsp;jsessionid=', '');
+        result = result.replace(constant.urls[base_url_index] + 'frameset.jsp;jsessionid=', '');
         return callback(null, result);
       } else {
         return callback(constant.cookie.user_error, null);
