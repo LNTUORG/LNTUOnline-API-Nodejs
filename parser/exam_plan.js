@@ -22,11 +22,11 @@ var analyse_html = function(user_id, password, target, callback) {
       var plan = {};
       plan.studentId = user_id;
       plan.course = temps.eq(n).children('td').eq(0).text().trim();
-      var time_str = temps.eq(n).children('td').eq(1).text().trim();
-      var start_time = time_str.split('--', 2)[0];
-      var end_time = start_time.substring(0, 11) + time_str.split('--', 2)[1];
-      plan.startTime = moment(start_time).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-      plan.endTime = moment(end_time).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+      var time_str_arr = temps.eq(n).children('td').eq(1).text().trim().split(' ');
+      var time_str = time_str_arr[0];
+      var arr1 = time_str_arr[1].split('--');
+      plan.startTime = moment(time_str + 'T' + arr1[0] + '+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+      plan.endTime = moment(time_str + 'T' + arr1[1] + '+08:00').format('YYYY-MM-DDTHH:mm:ss.SSSZ');
       plan.location = temps.eq(n).children('td').eq(2).text().trim();
       plans.push(plan);
     }
