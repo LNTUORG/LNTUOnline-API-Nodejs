@@ -6,7 +6,7 @@
 var agent = require('../agent/dom_agent');
 var cheerio = require('cheerio');
 
-var analyse_html = function(user_id, password, target, callback) {
+var analyse_grades = function(user_id, password, target, callback) {
 
   agent.normal_agent(user_id, password, target, function (err, html) {
     if (err) {
@@ -32,15 +32,15 @@ var analyse_html = function(user_id, password, target, callback) {
       dict.averageCredit.summary = '您当前的平均学分绩为：' + average_credit;
     }
 
-    var temps = $('table[class="infolist_tab"]', html).eq(0).children('tr');
+    var grades_temp = $('table[class="infolist_tab"]', html).eq(0).children('tr');
     var keysets = [];
 
-    for (var n = 1; n < temps.length; n++) {
+    for (var n = 1; n < grades_temp.length; n++) {
       var grade = {};
-      grade.num = temps.eq(n).children('td').eq(0).text().trim();
-      grade.year = temps.eq(n).children('td').eq(9).text().trim().substring(0, 4);
-      grade.term = temps.eq(n).children('td').eq(9).text().trim().substring(4, 5);
-      grade.examType = temps.eq(n).children('td').eq(8).text().trim();
+      grade.num = grades_temp.eq(n).children('td').eq(0).text().trim();
+      grade.year = grades_temp.eq(n).children('td').eq(9).text().trim().substring(0, 4);
+      grade.term = grades_temp.eq(n).children('td').eq(9).text().trim().substring(4, 5);
+      grade.examType = grades_temp.eq(n).children('td').eq(8).text().trim();
 
       var key = grade.num + grade.year + grade.term + grade.examType;
       if (keysets.indexOf(key) >= 0) {
@@ -48,14 +48,14 @@ var analyse_html = function(user_id, password, target, callback) {
       }
       keysets.push(key);
 
-      grade.name = temps.eq(n).children('td').eq(1).text().trim();
-      grade.serialNum = temps.eq(n).children('td').eq(2).text().trim();
-      var sc = temps.eq(n).children('td').eq(3).text().trim();
+      grade.name = grades_temp.eq(n).children('td').eq(1).text().trim();
+      grade.serialNum = grades_temp.eq(n).children('td').eq(2).text().trim();
+      var sc = grades_temp.eq(n).children('td').eq(3).text().trim();
       grade.score = sc == '' ? '无成绩' : sc;
-      grade.credit = temps.eq(n).children('td').eq(4).text().trim();
-      grade.testMode = temps.eq(n).children('td').eq(5).text().trim();
-      grade.selectType = temps.eq(n).children('td').eq(6).text().trim();
-      grade.remarks = temps.eq(n).children('td').eq(7).text().trim();
+      grade.credit = grades_temp.eq(n).children('td').eq(4).text().trim();
+      grade.testMode = grades_temp.eq(n).children('td').eq(5).text().trim();
+      grade.selectType = grades_temp.eq(n).children('td').eq(6).text().trim();
+      grade.remarks = grades_temp.eq(n).children('td').eq(7).text().trim();
       grade.studentId = user_id;
 
       var s = parseFloat(grade.score);
@@ -79,8 +79,8 @@ var analyse_html = function(user_id, password, target, callback) {
       grades.push(grade);
     }
     dict.courseScores = grades;
-    callback(null, dict);
+    return callback(null, dict);
   });
 };
 
-module.exports = analyse_html;
+module.exports = analyse_grades;

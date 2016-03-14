@@ -6,12 +6,12 @@
 var express = require('express');
 var router = express.Router();
 var model = require('../utility/db');
-var parser = require('../parser/student');
+var student_parser = require('../parser/student');
 var constant = require('../agent/constant');
 
 router.get('/', function (req, res) {
 
-  parser(req.lntu_user_id, req.lntu_password, 'student/studentinfo/studentinfo.jsdo', function (err, result) {
+  student_parser(req.lntu_user_id, req.lntu_password, 'student/studentinfo/studentinfo.jsdo', function (err, result) {
     if (err == constant.cookie.user_error) {
       return res.status(400).json({ code: err, message: 'password error' });
     } else if (err == constant.cookie.net_error) {

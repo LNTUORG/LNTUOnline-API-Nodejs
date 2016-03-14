@@ -22,14 +22,14 @@ router.post('/login', function (req, res) {
     ip_address: req.ip,
     user_agent: req.useragent['source']
   };
-
   if (req.body['userId'].length == 10) {
     user.type = 'STUDENT'
   } else {
     user.type = 'TEACHER'
   }
   res.contentType('application/json');
-  agent.just_get_cookie(req.body['userId'], req.body['password'], function (err) {
+  agent.get_cookie(req.body['userId'], req.body['password'], function (err) {
+
     if (err == constant.cookie.user_error) {
       return res.status(400).json({ code: err, message: 'password error' });
     } else if (err == constant.cookie.net_error) {

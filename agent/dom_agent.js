@@ -3,7 +3,6 @@
  */
 'use strict';
 
-var async = require('async');
 var eventproxy = require('eventproxy');
 var moment = require('moment');
 var charset = require('superagent-charset');
@@ -14,36 +13,26 @@ var mail = require('../utility/mail');
 
 charset(request);
 
-var base_url_index = 4;
-var base_url = constant.urls[base_url_index];
-var login_url = base_url + 'j_acegi_security_check';
-var uri = '';
-var user_id = '';
-var password = '';
+var base_url_index = 2;
 
 var normal_agent = function (u_id, passwd, target, callback) {
-  uri = base_url + target;
-  user_id = u_id;
-  password = passwd;
-  async.waterfall([
-    get_cookie,
-    get_dom
-  ], function (err, final) {
-    return callback(err, final);
+
+  get_cookie(u_id, passwd, function (err, cookie) {
+    if (err) {
+      return callback(err, null);
+    } else {
+      get_dom(target, cookie, function (err, final) {
+        return callback(err, final);
+      })
+    }
   });
 };
 
-var just_get_cookie = function (u_id, passwd, callback) {
-  user_id = u_id;
-  password = passwd;
-  get_cookie(callback);
-};
-
-var get_cookie = function (callback) {
+var get_cookie = function (u_id, passwd, callback) {
   request
-    .post(login_url)
-    .send('j_username=' + user_id)
-    .send('j_password=' + password)
+    .post(constant.urls[base_url_index] + 'j_acegi_security_check')
+    .send('j_username=' + u_id)
+    .send('j_password=' + passwd)
     .timeout(3000)
     .set('Accept', 'application/json')
     .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
@@ -54,7 +43,7 @@ var get_cookie = function (callback) {
       }
       var result = res.redirects[0];
       if (result.indexOf('frameset.jsp') > 0) {
-        result = result.replace(base_url + 'frameset.jsp;jsessionid=', '');
+        result = result.replace(constant.urls[base_url_index] + 'frameset.jsp;jsessionid=', '');
         return callback(null, result);
       } else {
         return callback(constant.cookie.user_error, null);
@@ -62,9 +51,9 @@ var get_cookie = function (callback) {
     });
 };
 
-var get_dom = function (cookie, callback) {
+var get_dom = function (target, cookie, callback) {
   request
-    .get(uri)
+    .get(constant.urls[base_url_index] + target)
     .set('Cookie', 'JSESSIONID=' + cookie + '; AJSTAT_ok_times=1')
     .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
     .charset('gbk')
@@ -95,7 +84,7 @@ var net_speed = function (u_id, passwd, url, callback) {
       }
       var result = res.redirects[0];
       if (result.indexOf('frameset.jsp') > 0) {
-        result = result.replace(base_url + 'frameset.jsp;jsessionid=', '');
+        result = result.replace(constant.urls[base_url_index] + 'frameset.jsp;jsessionid=', '');
         return callback(null, result);
       } else {
         return callback(constant.cookie.user_error, null);
@@ -126,7 +115,7 @@ var test_speed = function (callback) {
     subj = subj.concat('【教务在线2.0 ', config.server_name, '】维护日志');
     mail(subj, content, function(err, final) {
     });
-    callback(content);
+    return callback(content);
   });
 
 
@@ -139,7 +128,6 @@ var test_speed = function (callback) {
       if (err) {
         time_diff = '3600';
       }
-
       content += 'test: ' + url + '\n' + 'speed: ' + time_diff + '(ms)\n\n';
       results.push({ res: time_diff, url: url });
       ep.emit('test_speed');
@@ -150,6 +138,6 @@ var test_speed = function (callback) {
 
 module.exports = {
   normal_agent: normal_agent,
-  just_get_cookie: just_get_cookie,
+  get_cookie: get_cookie,
   test_speed: test_speed
 };
