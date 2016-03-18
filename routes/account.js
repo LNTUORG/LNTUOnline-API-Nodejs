@@ -19,7 +19,7 @@ router.post('/login', function (req, res) {
     type: '',
     update_at: new Date().toISOString(),
     expires_at: new Date().addDay(30).toISOString(),
-    ip_address: req.ip,
+    ip_address: req.headers['x-forwarded-for'],
     user_agent: req.useragent['source']
   };
   if (req.body['userId'].length == 10) {
