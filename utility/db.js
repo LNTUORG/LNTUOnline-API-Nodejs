@@ -42,14 +42,23 @@ var feedback_schema = new mongoose.Schema({
   content: { type: String }
 });
 
+var push_token_schema = new mongoose.Schema({
+  id: { type: String, default: uuid.v4() },
+  user_id: { type: String },
+  create_at: { type: Date, default: Date.now() },
+  push_token: { type: String }
+});
+
 var user_model = db.model('user', user_schema);
 var user_detail_model = db.model('user_detail', user_detail_schema);
 var crash_log_model = db.model('crash_log', feedback_schema);
 var advice_model = db.model('advices', feedback_schema);
+var push_token_model = db.model('push_token', push_token_schema);
 
 module.exports = {
   user_model: user_model,
   user_detail_model: user_detail_model,
   crash_log_model: crash_log_model,
-  advice_model: advice_model
+  advice_model: advice_model,
+  push_token_model: push_token_model
 };

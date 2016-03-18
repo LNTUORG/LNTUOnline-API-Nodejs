@@ -27,7 +27,7 @@ router.post('/login', function (req, res) {
   } else {
     user.type = 'TEACHER'
   }
-  res.contentType('application/json');
+
   agent.get_cookie(req.body['userId'], req.body['password'], function (err) {
 
     if (err == constant.cookie.user_error) {
@@ -53,6 +53,18 @@ router.post('/login', function (req, res) {
       userType: user.type
     });
   });
+});
+
+router.post('/push-token', function (req, res) {
+  if (req.body['content'] == '') {
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
+  }
+  var token = new model.push_token_model({
+    user_id: req.body['userId'],
+    push_token: req.body['deviceToken']
+  });
+  token.save();
+  return res.status(204).send();
 });
 
 module.exports = router;
