@@ -10,6 +10,7 @@ var config = require('../config');
 var mail = require('../utility/mail');
 var model = require('../utility/db');
 var constant = require('../agent/constant');
+var student_parser = require('../parser/student');
 
 router.post('/crash-log', function (req, res) {
   var crash = new model.crash_log_model({
@@ -46,14 +47,22 @@ router.post('/advice', function (req, res) {
   advice.save();
 
   if (config.mail.enable) {
-    var subj = '';
-    subj = subj.concat('【教务在线2.0 ', config.server_name, '】用户反馈');
-    var content = '时间: ' + moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ') +
-      '\n\n尾巴: ' + req.useragent['source'] +
-      '\n\n学号: ' + req.lntu_user_id +
-      '\n\n内容: ' + req.body['content'];
+    student_parser(req.lntu_user_id, req.lntu_password, 'student/studentinfo/studentinfo.jsdo', function (err, result) {
+      var subj = '';
+      subj = subj.concat('【教务在线2.0 ', config.server_name, '】用户反馈');
 
-    mail(subj, content, function (err, final) {
+      var content = '时间: ' + moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ') +
+        '\n\n尾巴: ' + req.useragent['source'] +
+        '\n\n学号: ' + req.lntu_user_id +
+        '\n班级: ' + result['classInfo'] +
+        '\n性别: ' + result['sex'] +
+        '\n学院: ' + result['college'] +
+        '\n姓名: ' + result['name'] +
+        '\n照片: ' + result['photoUrl'] +
+        '\n\n内容: ' + req.body['content'];
+
+      mail(subj, content, function (err, final) {
+      });
     });
   }
   return res.status(204).send();
