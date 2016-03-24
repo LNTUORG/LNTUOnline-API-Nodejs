@@ -114,6 +114,7 @@ var test_speed = function (callback) {
     var subj = '';
     subj = subj.concat('【教务在线2.0 ', config.server_name, '】维护日志');
     mail(subj, content, function(err, final) {
+      console.log(err, final);
     });
     return callback(content);
   });
