@@ -8,7 +8,7 @@ var config = {
   first_week_monday: '2016-02-29T00:00:00.000+08:00',
   server_name: 'xxxx',
   secret_key: 'xxxx',
-
+  
   db: {
     uri: 'mongodb://root:123@localhost:27017/lntuonlinev2'
   },

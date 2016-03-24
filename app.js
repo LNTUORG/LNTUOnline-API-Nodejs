@@ -44,6 +44,5 @@ app.use('/course-eva-info/:id', course_eva);
 app.use('/feedback', feedback);
 
 var server = app.listen(config.port, function () {
-
   console.log('LNTUOnline app listening at http://%s:%s', server.address().address, server.address().port);
 });

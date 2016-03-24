@@ -1,6 +1,6 @@
 {
   "name": "lntuolv3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A proxy server written in Node.js.",
   "main": "app.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "GPL-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pupboss/LNTUOnline-API-Nodejs.git"
+    "url": "git://github.com/LNTUORG/LNTUOnline-API-Nodejs.git"
   },
   "dependencies": {
     "body-parser": "^1.15.0",

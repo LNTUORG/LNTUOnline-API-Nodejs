@@ -6,11 +6,11 @@ This is an agent of Liaoning Technical University Education Administration Syste
 
 ### Principle
 
-This proxy just like a spider, when you request in this system, our proxy server would simulate your login, analyze the important information, and finally return json to you.
+This proxy just like a spider, when you request in this system, our proxy server would simulate your login, parse the important information, and finally return json to you.
 
 **WARMING: We don't collect your information, once you changed your password the proxy won't work anymore**
 
-### Useage
+### Usage
 
 - Our API obey RESTful Standard strictly
 - We use SSL to make it more security
@@ -67,7 +67,7 @@ This proxy just like a spider, when you request in this system, our proxy server
 - return: [Try it on your own](#)
 - error: Test it on your own
 
-#### Unpass Course
+#### Un-pass Course
 
 - Header: Key: "Authorization", Value: loginToken
 - Method: GET
