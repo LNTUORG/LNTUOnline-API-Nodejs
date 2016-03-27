@@ -9,7 +9,6 @@ var charset = require('superagent-charset');
 var request = require('superagent');
 var constant = require('./constant');
 var config = require('../config');
-var mail = require('../utility/mail');
 
 charset(request);
 
@@ -111,10 +110,6 @@ var test_speed = function (callback) {
     base_url_index = constant.urls.indexOf(results[0].url);
 
     content += '\n\nChange url to index ' + base_url_index + ' : ' + results[0].url + '\n\n';
-    var subj = '';
-    subj = subj.concat('【教务在线2.0 ', config.server_name, '】维护日志');
-    mail(subj, content, function(err, final) {
-    });
     return callback(content);
   });
   
