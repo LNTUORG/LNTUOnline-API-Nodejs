@@ -10,6 +10,7 @@ var model = require('../utility/db');
 var utility = require('../utility');
 var agent = require('../agent/dom_agent');
 var constant = require('../agent/constant');
+var config = require('../config');
 
 router.post('/login', function (req, res) {
   var user = {
@@ -22,7 +23,16 @@ router.post('/login', function (req, res) {
     ip_address: req.headers['x-forwarded-for'],
     user_agent: req.useragent['source']
   };
-  if (req.body['userId'].length == 10) {
+  if (req.body['userId'] == config.super_user.user_id) {
+    if (req.body['password'] == config.super_user.password) {
+      user.type = 'ADMIN';
+      user.password = utility.encrypt(user.password);
+      update_user(user);
+      return res.status(200).json(generate_dict(user));
+    } else {
+      return res.status(400).json({ code: constant.cookie.user_error, message: 'password error' });
+    }
+  } else if (req.body['userId'].length == 10) {
     user.type = 'STUDENT'
   } else {
     user.type = 'TEACHER'
@@ -36,22 +46,8 @@ router.post('/login', function (req, res) {
       return res.status(500).json({ code: err, message: 'The server may be down.' });
     }
     user.password = utility.encrypt(user.password);
-    model.user_model.find({ id: user.id }, function (error, docs) {
-      if(error || docs.length < 1){
-        user.create_at = new Date().toISOString();
-        model.user_model.create(user, function (error, docs) {
-        });
-      }else{
-        model.user_model.update({ id: user.id }, user, function (error, docs) {
-        });
-      }
-    });
-    return res.status(200).json({
-      userId: user.id,
-      loginToken: user.login_token,
-      expiresAt: user.expires_at,
-      userType: user.type
-    });
+    update_user(user);
+    return res.status(200).json(generate_dict(user));
   });
 });
 
@@ -66,5 +62,27 @@ router.post('/push-token', function (req, res) {
   token.save();
   return res.status(204).send();
 });
+
+function update_user(user) {
+  model.user_model.find({ id: user.id }, function (error, docs) {
+    if(error || docs.length < 1){
+      user.create_at = new Date().toISOString();
+      model.user_model.create(user, function (error, docs) {
+      });
+    }else{
+      model.user_model.update({ id: user.id }, user, function (error, docs) {
+      });
+    }
+  });
+}
+
+function generate_dict(user) {
+  return {
+    userId: user.id,
+    loginToken: user.login_token,
+    expiresAt: user.expires_at,
+    userType: user.type
+  }
+}
 
 module.exports = router;
