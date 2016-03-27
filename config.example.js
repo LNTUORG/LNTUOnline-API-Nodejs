@@ -25,6 +25,10 @@ var config = {
     enable: true,
     user_id: '133333333',
     password: 'xxxx'
+  },
+  super_user: {
+    user_id: '',
+    password: ''
   }
 };
 

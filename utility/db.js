@@ -13,7 +13,7 @@ db.connection.on("error", function (error) {
 });
 
 var user_schema = new mongoose.Schema({
-  id: { type: Number },
+  id: { type: String },
   login_token: { type: String },
   password: { type: String },
   type: { type: String },
@@ -25,7 +25,7 @@ var user_schema = new mongoose.Schema({
 });
 
 var user_detail_schema = new mongoose.Schema({
-  id: { type: Number },
+  id: { type: String },
   name: { type: String },
   photo_url: { type: String },
   class_info: { type: String },
