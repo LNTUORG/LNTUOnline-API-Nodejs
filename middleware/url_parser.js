@@ -19,6 +19,8 @@ module.exports = function (req, res, next, value) {
         return res.status(400).json({ code: constant.cookie.args_error, message: '该用户不存在' });
       }
     });
+  } else if (req.lntu_type == 'TEACHER') {
+    return res.status(400).json({ code: constant.cookie.user_error, message: '暂不支持教师用户' });
   } else {
     next();
   }
