@@ -137,5 +137,6 @@ var test_speed = function (callback) {
 module.exports = {
   normal_agent: normal_agent,
   get_cookie: get_cookie,
-  test_speed: test_speed
+  test_speed: test_speed,
+  base_url_index: base_url_index
 };

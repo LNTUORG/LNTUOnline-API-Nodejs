@@ -6,6 +6,7 @@
 var agent = require('../agent/dom_agent');
 var cheerio = require('cheerio');
 var moment = require('moment');
+var constant = require('../agent/constant');
 
 var analyse_student = function(user_id, password, target, callback) {
 
@@ -39,6 +40,9 @@ var analyse_student = function(user_id, password, target, callback) {
     student.remarks = student_temp.eq(17).children('td').eq(0).text().trim();
     student.nationality = student_temp.eq(0).children('td').eq(1).text().trim();
     student.photoUrl = student_temp.eq(0).children('td').eq(2).children('img').attr('src');
+    if (student.photoUrl.indexOf('studentinfo') < 0) {
+      student.photoUrl = constant.urls[agent.base_url_index] + 'student/studentinfo/' + student.photoUrl;
+    }
     student.birthplace = student_temp.eq(1).children('td').eq(1).text().trim();
     student.birthday = moment(student_temp.eq(2).children('td').eq(1).text().trim()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
     student.politicalAffiliation = student_temp.eq(3).children('td').eq(1).text().trim();
