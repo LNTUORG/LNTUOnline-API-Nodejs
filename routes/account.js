@@ -52,7 +52,7 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/push-token', function (req, res) {
-  if (req.body['content'] == '') {
+  if (req.body['deviceToken'] == '') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var token = new model.push_token_model({
