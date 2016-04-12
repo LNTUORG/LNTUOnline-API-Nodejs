@@ -10,6 +10,12 @@ var room_schedule_parser = require('../parser/room_schedule');
 var constant = require('../agent/constant');
 var config = require('../config');
 
+router.post('/hex-trans', function (req, res) {
+  var result = {};
+  result.msg = parseInt(req.body['count'], 2).toString(8);
+  return res.status(200).json(result);
+});
+
 router.get('/auto-fix', function (req, res) {
 
   agent.test_speed(function (content) {
