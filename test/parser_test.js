@@ -13,6 +13,32 @@ var term = '春';
 
 var html = fs.readFileSync('/Users/pupboss/Desktop/html.html').toString();
 
+function parse_room(html) {
+  var $ = cheerio.load(html);
+  var room_arr = [];
+  var room_temp = $('table[cellspacing="1"]', html);
+  for (var i = 0; i < room_temp.length; i++) {
+    var room_status = room_temp.eq(i).children('tr').eq(1).children('td');
+    var status_arr = [];
+    for (var j = 0; j < room_status.length; j+=2) {
+      status_arr.push(room_status.eq(j).text().trim());
+    }
+    room_arr.push(status_arr);
+  }
+  var binary_str = '';
+  for (var k = 0; k < room_arr.length; k++) {
+    var temp_arr = room_arr[k];
+    for (var l = 0; l < temp_arr.length; l++) {
+      if (temp_arr[l] != '') {
+        binary_str += '1';
+      } else {
+        binary_str += '0';
+      }
+    }
+  }
+  console.log(parseInt(binary_str, 2).toString(8));
+}
+
 function parse_student(html) {
   var student = {};
   var $ = cheerio.load(html);
@@ -295,10 +321,11 @@ function parse_class_table(html) {
   return class_dict;
 }
 
-for (var j = 0; j < 50; j++) {
-  parse_score(html);
-  //parse_exam(html);
-  //parse_class_table(html);
-  //parse_student(html);
-}
-console.log(parse_score(html));
+// for (var j = 0; j < 50; j++) {
+//   parse_score(html);
+//   //parse_exam(html);
+//   //parse_class_table(html);
+//   //parse_student(html);
+// }
+// console.log(parse_score(html));
+parse_room(html);
