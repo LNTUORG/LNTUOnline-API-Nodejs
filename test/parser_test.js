@@ -16,27 +16,38 @@ var html = fs.readFileSync('/Users/pupboss/Desktop/html.html').toString();
 function parse_room(html) {
   var $ = cheerio.load(html);
   var room_arr = [];
+  var total_status_arr = [];
+  var info_temp = $('table[class="infolist_tab"]', html).eq(0);
+  var class_temp = info_temp.children('tr');
+  for (var h = 1; h < class_temp.length; h++) {
+    room_arr.push(class_temp.eq(h).children('td').eq(0).text().trim());
+  }
+
   var room_temp = $('table[cellspacing="1"]', html);
   for (var i = 0; i < room_temp.length; i++) {
     var room_status = room_temp.eq(i).children('tr').eq(1).children('td');
     var status_arr = [];
     for (var j = 0; j < room_status.length; j+=2) {
-      status_arr.push(room_status.eq(j).text().trim());
+      status_arr.push(room_status.eq(j).text().trim() != '' ? '1' : '0');
     }
-    room_arr.push(status_arr);
+    total_status_arr.push(status_arr);
   }
-  var binary_str = '';
+  // var binary_str = '';
+  // for (var k = 0; k < room_arr.length; k++) {
+  //   var temp_arr = room_arr[k];
+  //   for (var l = 0; l < temp_arr.length; l++) {
+  //     if (temp_arr[l] != '') {
+  //       binary_str += '1';
+  //     } else {
+  //       binary_str += '0';
+  //     }
+  //   }
+  // }
+  var dict_arr = [];
   for (var k = 0; k < room_arr.length; k++) {
-    var temp_arr = room_arr[k];
-    for (var l = 0; l < temp_arr.length; l++) {
-      if (temp_arr[l] != '') {
-        binary_str += '1';
-      } else {
-        binary_str += '0';
-      }
-    }
+    dict_arr.push({name: room_arr[k], status: total_status_arr[k]});
   }
-  console.log(parseInt(binary_str, 2).toString(8));
+  console.log(dict_arr);
 }
 
 function parse_student(html) {
