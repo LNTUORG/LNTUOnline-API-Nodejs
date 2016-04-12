@@ -19,9 +19,9 @@ router.get('/auto-fix', function (req, res) {
 
 router.post('/v1/room-schedule', function (req, res) {
   var trusted_arr = ['6', '7', '9', '11', '14'];
-  var building_id = req.body['buildingid'];
-  var week = req.body['whichweek'];
-  var week_day = req.body['week'];
+  var building_id = req.body['buildingID'];
+  var week = req.body['week'];
+  var week_day = req.body['weekDay'];
 
   if (trusted_arr.indexOf(building_id) < 0 || parseInt(week) > 26 || parseInt(week) < 1 || parseInt(week_day) < 1 || parseInt(week_day) > 7) {
     return res.status(400).json({ code: constant.cookie.args_error, message: '' });
