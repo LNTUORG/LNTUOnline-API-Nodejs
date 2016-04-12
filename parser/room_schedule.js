@@ -5,6 +5,7 @@
 
 var agent = require('../agent/dom_agent');
 var cheerio = require('cheerio');
+var config = require('../config');
 
 var analyse_room = function(user_id, password, buildingid, whichweek, week, target, callback) {
 
@@ -35,7 +36,10 @@ var analyse_room = function(user_id, password, buildingid, whichweek, week, targ
     for (var k = 0; k < room_arr.length; k++) {
       dict_arr.push({name: room_arr[k], status: total_status_arr[k]});
     }
-    return callback(null, dict_arr);
+    var dict = {};
+    dict.firstWeekMondayAt = config.first_week_monday;
+    dict.results = dict_arr;
+    return callback(null, dict);
   });
 };
 
