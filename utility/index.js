@@ -23,6 +23,22 @@ function decrypt(text){
   return dec;
 }
 
+function parse_hex (binary_str) {
+  var result = '';
+  while (binary_str.length % 3 != 0) {
+    binary_str += '0';
+  }
+  for (var i = 0; i < binary_str.length / 3; i++) {
+    var temp_str = binary_str.substring(i * 3, (i + 1) * 3);
+    var sum = 0;
+    for (var j = 0; j < 3; j++) {
+      sum +=  temp_str[j] * Math.pow(2, 2 - j);
+    }
+    result += sum;
+  }
+  return result;
+}
+
 Date.prototype.addDay = function (num) {
 
   this.setDate(this.getDate() + parseInt(num));
@@ -31,5 +47,6 @@ Date.prototype.addDay = function (num) {
 
 module.exports = {
   encrypt: encrypt,
-  decrypt: decrypt
+  decrypt: decrypt,
+  parse_hex: parse_hex
 };
