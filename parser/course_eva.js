@@ -47,6 +47,7 @@ var analyse_detail = function(user_id, password, target, callback) {
 
     var post_content = '';
     for (var i = 0; i< eva_form_heads.length; i++) {
+      // post_content[eva_form_heads.eq(i).attr('name')] = eva_form_heads.eq(i).attr('value');
       post_content += eva_form_heads.eq(i).attr('name') + '=' + eva_form_heads.eq(i).attr('value') + '&';
     }
 
@@ -55,7 +56,8 @@ var analyse_detail = function(user_id, password, target, callback) {
       var eva_td = eva_form_body.eq(j).children('td').eq(2);
       var eva_td_inputs = eva_td.children('input');
 
-      for (var k = 1; k< 5; k++) {
+      for (var k = 0; k< 5; k++) {
+        // post_content[eva_td_inputs.eq(k).attr('name')] = eva_td_inputs.eq(k).attr('value')
         post_content += eva_td_inputs.eq(k).attr('name') + '=' + eva_td_inputs.eq(k).attr('value') + '&'
       }
     }
