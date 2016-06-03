@@ -9,6 +9,7 @@ var charset = require('superagent-charset');
 var request = require('superagent');
 var constant = require('./constant');
 var config = require('../config');
+var qs = require('qs');
 
 charset(request);
 
@@ -23,6 +24,19 @@ var normal_agent = function (u_id, passwd, target, callback) {
       get_dom(target, cookie, function (err, final) {
         return callback(err, final);
       })
+    }
+  });
+};
+
+var eva_agent = function (u_id, passwd, post_body, callback) {
+
+  get_cookie(u_id, passwd, function (err, cookie) {
+    if (err) {
+      return callback(err, null);
+    } else {
+      eva_course(cookie, post_body, function (err, final) {
+        return callback(err, final);
+      });
     }
   });
 };
@@ -47,6 +61,23 @@ var get_cookie = function (u_id, passwd, callback) {
       } else {
         return callback(constant.cookie.user_error, null);
       }
+    });
+};
+
+var eva_course = function (cookie, post_body, callback) {
+  request
+  .post(constant.urls[base_url_index] + 'eva/index/putresult.jsdo')
+    .query(post_body)
+    .set('Cookie', 'JSESSIONID=' + cookie)
+    .set('Content-Type', 'application/x-www-form-urlencoded')
+    .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
+    .charset('gbk')
+    .end(function(err, res) {
+      console.log(res);
+      if (err) {
+        return callback(constant.cookie.net_error, null);
+      }
+      return callback(null, null);
     });
 };
 
@@ -132,6 +163,7 @@ var test_speed = function (callback) {
 module.exports = {
   normal_agent: normal_agent,
   get_cookie: get_cookie,
+  eva_agent: eva_agent,
   test_speed: test_speed,
   base_url_index: base_url_index
 };
