@@ -332,6 +332,29 @@ function parse_class_table(html) {
   return class_dict;
 }
 
+function parse_eva_detail(html) {
+
+  var $ = cheerio.load(html);
+
+  var eva_form_heads = $('form[name="form1"]', html).eq(0).children('input');
+
+  var post_content = {};
+  for (var i = 0; i< eva_form_heads.length; i++) {
+    post_content[eva_form_heads.eq(i).attr('name')] = eva_form_heads.eq(i).attr('value');
+  }
+
+  var eva_form_body = $('table[class="infolist_hr"]', html).eq(0).children('tr');
+  for (var j = 1; j< eva_form_body.length; j++) {
+    var eva_td = eva_form_body.eq(j).children('td').eq(2);
+    var eva_td_inputs = eva_td.children('input');
+
+    for (var k = 1; k< 5; k++) {
+      post_content[eva_td_inputs.eq(k).attr('name')] = eva_td_inputs.eq(k).attr('value');
+    }
+  }
+  console.log(post_content);
+}
+
 // for (var j = 0; j < 50; j++) {
 //   parse_score(html);
 //   //parse_exam(html);
@@ -339,4 +362,4 @@ function parse_class_table(html) {
 //   //parse_student(html);
 // }
 // console.log(parse_score(html));
-parse_room(html);
+parse_eva_detail(html);
