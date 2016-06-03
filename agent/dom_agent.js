@@ -6,12 +6,11 @@
 var eventproxy = require('eventproxy');
 var moment = require('moment');
 var charset = require('superagent-charset');
-var request = require('superagent');
+var superagent = require('superagent');
 var constant = require('./constant');
 var config = require('../config');
-var qs = require('qs');
 
-charset(request);
+charset(superagent);
 
 var base_url_index = 4;
 
@@ -42,7 +41,7 @@ var eva_agent = function (u_id, passwd, post_body, callback) {
 };
 
 var get_cookie = function (u_id, passwd, callback) {
-  request
+  superagent
     .post(constant.urls[base_url_index] + 'j_acegi_security_check')
     .send('j_username=' + u_id)
     .send('j_password=' + passwd)
@@ -65,15 +64,15 @@ var get_cookie = function (u_id, passwd, callback) {
 };
 
 var eva_course = function (cookie, post_body, callback) {
-  request
-  .post(constant.urls[base_url_index] + 'eva/index/putresult.jsdo')
-    .query(post_body)
+
+  superagent
+    .post(constant.urls[base_url_index] + 'eva/index/putresult.jsdo')
+    .type('form')
     .set('Cookie', 'JSESSIONID=' + cookie)
-    .set('Content-Type', 'application/x-www-form-urlencoded')
     .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
     .charset('gbk')
+    .send(post_body)
     .end(function(err, res) {
-      console.log(res);
       if (err) {
         return callback(constant.cookie.net_error, null);
       }
@@ -82,7 +81,7 @@ var eva_course = function (cookie, post_body, callback) {
 };
 
 var get_dom = function (target, cookie, callback) {
-  request
+  superagent
     .get(constant.urls[base_url_index] + target)
     .set('Cookie', 'JSESSIONID=' + cookie + '; AJSTAT_ok_times=1')
     .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
@@ -100,7 +99,7 @@ var get_dom = function (target, cookie, callback) {
 };
 
 var net_speed = function (u_id, passwd, url, callback) {
-  request
+  superagent
     .post(url + 'j_acegi_security_check')
     .send('j_username=' + u_id)
     .send('j_password=' + passwd)
