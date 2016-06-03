@@ -26,7 +26,7 @@ var analyse_eva = function(user_id, password, target, callback) {
       eva.num = course_str[1];
       eva.done = eva_temp.eq(n).children('td').eq(2).text().trim() == '已评估';
       if (!eva.done) {
-        eva.url = eva_temp.eq(n).children('td').eq(3).text().trim();
+        eva.url = eva_temp.eq(n).children('td').eq(3).children('a').attr('href').replace('./evaindexinfo', 'evaindexinfo');
       }
       evas.push(eva);
     }
