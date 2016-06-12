@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jay Lee",
-  "license": "GPL-2.0",
+  "license": "AGPL",
   "repository": {
     "type": "git",
     "url": "git://github.com/LNTUORG/LNTUOnline-API-Nodejs.git"
