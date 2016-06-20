@@ -93,6 +93,9 @@ router.post('/change-password', function (req, res) {
     if (user.password != utility.decrypt(docs[0]['password'])){
       return res.status(400).json({ code: constant.cookie.user_error, message: 'password error' });
     } else {
+      if (req.body['newPassword'] == '') {
+        return res.status(400).json({ code: constant.cookie.args_error, message: 'Args error' });
+      }
       user.password = utility.encrypt(req.body['newPassword']);
       update_user(user);
       return res.status(200).json(generate_dict(user));
