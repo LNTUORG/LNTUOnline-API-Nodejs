@@ -38,6 +38,7 @@ router.post('/login', function (req, res) {
         return res.status(400).json({ code: constant.cookie.user_error, message: 'password error' });
       } else {
         user.type = 'CLASS_ADMIN';
+        user.password = utility.encrypt(user.password);
         update_user(user);
         return res.status(200).json(generate_dict(user));
       }
