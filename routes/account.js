@@ -93,7 +93,7 @@ router.post('/change-password', function (req, res) {
     if (user.password != utility.decrypt(docs[0]['password'])){
       return res.status(400).json({ code: constant.cookie.user_error, message: 'password error' });
     } else {
-      if (req.body['newPassword'] == '') {
+      if (req.body['newPassword'] == '' || typeof(req.body['newPassword'])=="undefined") {
         return res.status(400).json({ code: constant.cookie.args_error, message: 'Args error' });
       }
       user.password = utility.encrypt(req.body['newPassword']);
