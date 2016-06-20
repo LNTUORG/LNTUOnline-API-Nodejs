@@ -32,6 +32,16 @@ router.post('/login', function (req, res) {
     } else {
       return res.status(400).json({ code: constant.cookie.user_error, message: 'password error' });
     }
+  } else if (req.body['userId'] == config.class_admin.user_id) {
+    model.user_model.find({ id: config.class_admin.user_id }, function (error, docs) {
+      if (user.password != utility.decrypt(docs[0]['password'])){
+        return res.status(400).json({ code: constant.cookie.user_error, message: 'password error' });
+      } else {
+        user.type = 'CLASS_ADMIN';
+        update_user(user);
+        return res.status(200).json(generate_dict(user));
+      }
+    });
   } else if (req.body['userId'].length == 10) {
     user.type = 'STUDENT'
   } else {
