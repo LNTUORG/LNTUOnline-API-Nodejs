@@ -74,6 +74,32 @@ router.post('/push-token', function (req, res) {
   return res.status(204).send();
 });
 
+router.post('/change-password', function (req, res) {
+  if (req.body['userId'] != config.class_admin.user_id) {
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'You cant change password' });
+  }
+  var user = {
+    id: req.body['userId'],
+    login_token: uuid.v4(),
+    password: req.body['password'],
+    type: 'CLASS_ADMIN',
+    update_at: new Date().toISOString(),
+    expires_at: new Date().addDay(30).toISOString(),
+    ip_address: req.headers['x-forwarded-for'],
+    user_agent: req.useragent['source']
+  };
+
+  model.user_model.find({ id: config.class_admin.user_id }, function (error, docs) {
+    if (user.password != utility.decrypt(docs[0]['password'])){
+      return res.status(400).json({ code: constant.cookie.user_error, message: 'password error' });
+    } else {
+      user.password = utility.encrypt(req.body['newPassword']);
+      update_user(user);
+      return res.status(200).json(generate_dict(user));
+    }
+  });
+});
+
 function update_user(user) {
   model.user_model.find({ id: user.id }, function (error, docs) {
     if(error || docs.length < 1){
