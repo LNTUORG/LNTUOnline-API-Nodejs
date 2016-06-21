@@ -9,7 +9,6 @@ var agent = require('../agent/dom_agent');
 var room_schedule_parser = require('../parser/room_schedule');
 var constant = require('../agent/constant');
 var config = require('../config');
-var cors = require('cors');
 
 router.post('/hex-trans', function (req, res) {
   var result = {};
@@ -24,7 +23,7 @@ router.get('/auto-fix', function (req, res) {
   });
 });
 
-router.post('/v1/room-schedule', cors(), function (req, res) {
+router.post('/v1/room-schedule', function (req, res) {
   var trusted_arr = ['6', '7', '9', '11', '14'];
   var building_id = req.body['buildingID'];
   var week = req.body['week'];
