@@ -50,8 +50,8 @@ var push_token_schema = new mongoose.Schema({
 });
 
 var building_schema = new mongoose.Schema({
-  location_id: { type: String, default: '3' },
-  building_id: { type: String, default: '6' },
+  location_id: { type: String },
+  building_id: { type: String },
   building_name : { type: String, default: '尔雅楼' },
   building_phone : { type: String, default: '133' },
   create_at: { type: Date, default: Date.now() }
