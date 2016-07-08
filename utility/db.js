@@ -49,16 +49,25 @@ var push_token_schema = new mongoose.Schema({
   push_token: { type: String }
 });
 
+var building_schema = new mongoose.Schema({
+  building_id: { type: String, default: '6' },
+  building_name : { type: String, default: '尔雅楼' },
+  building_phone : { type: String, default: '133' },
+  create_at: { type: Date, default: Date.now() }
+});
+
 var user_model = db.model('user', user_schema);
 var user_detail_model = db.model('user_detail', user_detail_schema);
 var crash_log_model = db.model('crash_log', feedback_schema);
 var advice_model = db.model('advices', feedback_schema);
 var push_token_model = db.model('push_token', push_token_schema);
+var building_model = db.model('building', building_schema);
 
 module.exports = {
   user_model: user_model,
   user_detail_model: user_detail_model,
   crash_log_model: crash_log_model,
   advice_model: advice_model,
-  push_token_model: push_token_model
+  push_token_model: push_token_model,
+  building_model: building_model
 };
