@@ -44,11 +44,31 @@ router.post('/v1/room-schedule', function (req, res) {
   })
 });
 
+router.post('/v2/room-schedule', function (req, res) {
+  var building_id = req.body['building_id'];
+  var week = req.body['week'];
+  var week_day = req.body['weekDay'];
+
+  if (trusted_arr.indexOf(building_id) < 0 || parseInt(week) > 26 || parseInt(week) < 1 || parseInt(week_day) < 1 || parseInt(week_day) > 7) {
+    return res.status(400).json({ code: constant.cookie.args_error, message: '' });
+  }
+
+  room_schedule_parser(config.admin.user_id, config.admin.password, building_id, week, week_day, 'teacher/teachresource/roomschedule_week.jsdo', function (err, result) {
+    if (err == constant.cookie.user_error) {
+      return res.status(400).json({ code: err, message: 'password error' });
+    } else if (err == constant.cookie.net_error) {
+      return res.status(500).json({ code: err, message: 'The server may be down.' });
+    }
+    return res.status(200).json(result);
+  })
+});
+
 router.post('/v1/lntu-building', function (req, res) {
   if (typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var building = {
+    location_id: req.body['location_id'],
     building_id: req.body['building_id'],
     building_name: req.body['building_name'],
     building_phone: req.body['building_phone']
@@ -73,6 +93,7 @@ router.put('/v1/lntu-building', function (req, res) {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var building = {
+    location_id: req.body['location_id'],
     building_id: req.body['building_id'],
     building_name: req.body['building_name'],
     building_phone: req.body['building_phone']
