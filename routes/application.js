@@ -64,7 +64,7 @@ router.post('/v2/room-schedule', function (req, res) {
 });
 
 router.post('/v1/lntu-building', function (req, res) {
-  if (typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '') {
+  if (typeof req.body['location_id'] == 'undefined' || typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var building = {
@@ -89,7 +89,7 @@ router.post('/v1/lntu-building', function (req, res) {
 });
 
 router.put('/v1/lntu-building', function (req, res) {
-  if (typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '') {
+  if (typeof req.body['location_id'] == 'undefined' || typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var building = {
@@ -107,7 +107,7 @@ router.put('/v1/lntu-building', function (req, res) {
 });
 
 router.delete('/v1/lntu-building', function (req, res) {
-  if (req.body['building_id'] == '') {
+  if (typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   model.building_model.remove({ building_id: req.body['building_id'] }, function (error) {
