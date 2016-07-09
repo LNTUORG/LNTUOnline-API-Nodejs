@@ -122,4 +122,43 @@ router.get('/v1/lntu-building', function (req, res) {
   });
 });
 
+router.post('/v1/lntu-useless-class', function (req, res) {
+  if (typeof req.body['class_name'] == 'undefined' || typeof req.body['location_id'] == 'undefined' || typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['class_name'] == '') {
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
+  }
+  var useless_class = {
+    location_id: req.body['location_id'],
+    building_id: req.body['building_id'],
+    class_name: req.body['class_name']
+  };
+  model.useless_class_model.find({ class_name: req.body['class_name'] }, function (error, docs) {
+    if(error || docs.length < 1){
+      model.useless_class_model.create(useless_class, function (error, docs) {
+      });
+    } else {
+      model.useless_class_model.update({ class_name: req.body['class_name'] }, useless_class, function (error) {
+      });
+    }
+    return res.status(204).send();
+  });
+});
+
+router.delete('/v1/lntu-useless-class', function (req, res) {
+  if (typeof req.body['class_name'] == 'undefined' || req.body['class_name'] == '') {
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
+  }
+  model.useless_class_model.remove({ class_name: req.body['class_name'] }, function (error) {
+    if (error) {
+      return res.status(500).json({ code: err, message: 'The server may be down.' });
+    }
+    return res.status(204).send();
+  });
+});
+
+router.get('/v1/lntu-useless-class', function (req, res) {
+  model.useless_class_model.find({ }, function (error, docs) {
+    return res.status(200).json(docs);
+  });
+});
+
 module.exports = router;
