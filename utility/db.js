@@ -79,7 +79,7 @@ var advice_model = db.model('advices', feedback_schema);
 var push_token_model = db.model('push_token', push_token_schema);
 var building_model = db.model('building', building_schema);
 var useless_class_model = db.model('useless_class', useless_class_schema);
-var auto_send_model = db.model('building', auto_send_schema);
+var auto_send_model = db.model('auto_send', auto_send_schema);
 
 module.exports = {
   user_model: user_model,
