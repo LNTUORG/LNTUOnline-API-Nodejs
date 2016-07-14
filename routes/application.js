@@ -65,11 +65,12 @@ router.post('/v2/room-schedule', function (req, res) {
 });
 
 router.post('/v1/lntu-building', function (req, res) {
-  if (typeof req.body['send_time'] == 'undefined' || typeof req.body['auto_send'] == 'undefined' || typeof req.body['building_name'] == 'undefined' || typeof req.body['building_phone'] == 'undefined' || typeof req.body['location_id'] == 'undefined' || typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '' || req.body['location_id'] == '' || req.body['send_time'] == '' || req.body['auto_send'] == '') {
+  if (typeof req.body['location_name'] == 'undefined' || typeof req.body['send_time'] == 'undefined' || typeof req.body['auto_send'] == 'undefined' || typeof req.body['building_name'] == 'undefined' || typeof req.body['building_phone'] == 'undefined' || typeof req.body['location_id'] == 'undefined' || typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '' || req.body['location_id'] == '' || req.body['send_time'] == '' || req.body['auto_send'] == '' || req.body['location_name'] == '') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var building = {
     location_id: req.body['location_id'],
+    location_name: req.body['location_name'],
     building_id: req.body['building_id'],
     building_name: req.body['building_name'],
     building_phone: req.body['building_phone'],
@@ -89,11 +90,12 @@ router.post('/v1/lntu-building', function (req, res) {
 });
 
 router.put('/v1/lntu-building', function (req, res) {
-  if (typeof req.body['send_time'] == 'undefined' || typeof req.body['auto_send'] == 'undefined' || typeof req.body['building_name'] == 'undefined' || typeof req.body['building_phone'] == 'undefined' || typeof req.body['location_id'] == 'undefined' || typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '' || req.body['location_id'] == '' || req.body['send_time'] == '' || req.body['auto_send'] == '') {
+  if (typeof req.body['location_name'] == 'undefined' || typeof req.body['send_time'] == 'undefined' || typeof req.body['auto_send'] == 'undefined' || typeof req.body['building_name'] == 'undefined' || typeof req.body['building_phone'] == 'undefined' || typeof req.body['location_id'] == 'undefined' || typeof req.body['building_id'] == 'undefined' || req.body['building_id'] == '' || req.body['building_name'] == '' || req.body['building_phone'] == '' || req.body['location_id'] == '' || req.body['send_time'] == '' || req.body['auto_send'] == '' || req.body['location_name'] == '') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
   }
   var building = {
     location_id: req.body['location_id'],
+    location_name: req.body['location_name'],
     building_id: req.body['building_id'],
     building_name: req.body['building_name'],
     building_phone: req.body['building_phone'],

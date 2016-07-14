@@ -51,6 +51,7 @@ var push_token_schema = new mongoose.Schema({
 
 var building_schema = new mongoose.Schema({
   location_id: { type: String },
+  location_name: { type: String },
   building_id: { type: String },
   building_name : { type: String },
   building_phone : { type: String },
