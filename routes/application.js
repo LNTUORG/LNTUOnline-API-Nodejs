@@ -196,7 +196,7 @@ router.get('/v1/lntu-building-from-system', function (req, res) {
 
 router.get('/v1/lntu-room-from-system', function (req, res) {
   var location_id = req.query['location_id'];
-  var building_id = req.query['location_id'];
+  var building_id = req.query['building_id'];
   if (location_id == '' ||  typeof location_id == 'undefined' || building_id == '' ||  typeof building_id == 'undefined') {
     return res.status(400).json({ code: constant.cookie.args_error, message: 'location_id or building_id can not be null' });
   }
