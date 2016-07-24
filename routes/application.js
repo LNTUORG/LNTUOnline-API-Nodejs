@@ -8,6 +8,7 @@ var router = express.Router();
 var agent = require('../agent/dom_agent');
 var room_schedule_parser = require('../parser/room_schedule');
 var room_schedule_parser_v2 = require('../parser/room_schedule_v2');
+var lntu_building = require('../parser/lntu_building');
 var constant = require('../agent/constant');
 var config = require('../config');
 var model = require('../utility/db');
@@ -165,6 +166,32 @@ router.get('/v1/lntu-useless-class', function (req, res) {
   model.useless_class_model.find({ }, function (error, docs) {
     return res.status(200).json(docs);
   });
+});
+
+router.get('/v1/lntu-location-from-system', function (req, res) {
+  lntu_building.analyse_location(config.admin.user_id, config.admin.password, 'teacher/teachresource/roomschedulequery.jsdo', function (err, result) {
+    if (err == constant.cookie.user_error) {
+      return res.status(400).json({ code: err, message: 'password error' });
+    } else if (err == constant.cookie.net_error) {
+      return res.status(500).json({ code: err, message: 'The server may be down.' });
+    }
+    return res.status(200).json(result);
+  })
+});
+
+router.get('/v1/lntu-building-from-system', function (req, res) {
+  var location_id = req.query['location_id'];
+  if (location_id == '' ||  typeof location_id == 'undefined') {
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'location_id can not be null' });
+  }
+  lntu_building.analyse_building(config.admin.user_id, config.admin.password, location_id, function (err, result) {
+    if (err == constant.cookie.user_error) {
+      return res.status(400).json({ code: err, message: 'password error' });
+    } else if (err == constant.cookie.net_error) {
+      return res.status(500).json({ code: err, message: 'The server may be down.' });
+    }
+    return res.status(200).json(result);
+  })
 });
 
 module.exports = router;
