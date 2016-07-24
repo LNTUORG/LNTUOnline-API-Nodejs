@@ -194,4 +194,20 @@ router.get('/v1/lntu-building-from-system', function (req, res) {
   })
 });
 
+router.get('/v1/lntu-room-from-system', function (req, res) {
+  var location_id = req.query['location_id'];
+  var building_id = req.query['location_id'];
+  if (location_id == '' ||  typeof location_id == 'undefined' || building_id == '' ||  typeof building_id == 'undefined') {
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'location_id or building_id can not be null' });
+  }
+  lntu_building.analyse_room(config.admin.user_id, config.admin.password, location_id, building_id, function (err, result) {
+    if (err == constant.cookie.user_error) {
+      return res.status(400).json({ code: err, message: 'password error' });
+    } else if (err == constant.cookie.net_error) {
+      return res.status(500).json({ code: err, message: 'The server may be down.' });
+    }
+    return res.status(200).json(result);
+  })
+});
+
 module.exports = router;
