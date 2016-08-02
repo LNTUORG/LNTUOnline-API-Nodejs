@@ -135,7 +135,9 @@ router.post('/v1/lntu-useless-class', function (req, res) {
   }
   var useless_class = {
     location_id: req.body['location_id'],
+    location_name: req.body['location_id'],
     building_id: req.body['building_id'],
+    building_name: req.body['building_id'],
     class_name: req.body['class_name']
   };
   model.useless_class_model.find({ class_name: req.body['class_name'] }, function (error, docs) {

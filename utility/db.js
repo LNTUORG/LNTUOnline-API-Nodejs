@@ -62,7 +62,9 @@ var building_schema = new mongoose.Schema({
 
 var useless_class_schema = new mongoose.Schema({
   location_id: { type: String },
+  location_name: { type: String },
   building_id: { type: String },
+  building_name: { type: String },
   class_name : { type: String },
   create_at: { type: Date, default: Date.now() }
 });
