@@ -26,6 +26,9 @@ var config = {
     user_id: '133333333',
     password: 'xxxx'
   },
+  class_admin: {
+    user_id: 'class_admin'
+  },
   super_user: {
     user_id: '',
     password: ''

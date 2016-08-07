@@ -13,6 +13,20 @@ var term = '春';
 
 var html = fs.readFileSync('/Users/pupboss/Desktop/html.html').toString();
 
+function parse_location(html) {
+  var $ = cheerio.load(html);
+  var location_arr = [];
+
+  var location_all = $('select[name="aid"]', html).eq(0).children('option');
+  for (var i = 1; i < location_all.length; i++) {
+    var location = {};
+    location.location_name = location_all.eq(i).text().trim();
+    location.location_id = location_all.eq(i).attr('value');
+    location_arr.push(location);
+  }
+  return location_arr;
+}
+
 function parse_room(html) {
   var $ = cheerio.load(html);
   var room_arr = [];
@@ -362,4 +376,10 @@ function parse_eva_detail(html) {
 //   //parse_student(html);
 // }
 // console.log(parse_score(html));
+parse_location(html);
+parse_class_table(html);
 parse_eva_detail(html);
+parse_score(html);
+parse_student(html);
+parse_room(html);
+parse_exam(html);

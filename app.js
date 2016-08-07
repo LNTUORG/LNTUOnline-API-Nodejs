@@ -23,11 +23,13 @@ var class_table = require('./routes/class_table');
 var course_eva = require('./routes/course_eva');
 var feedback = require('./routes/feedback');
 var appl = require('./routes/application');
+var cors = require('cors');
 
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(useragent.express());
 app.use(compression());
 
+app.use(cors());
 app.use('/', index);
 app.use('/account', account);
 app.use('/application', appl);
