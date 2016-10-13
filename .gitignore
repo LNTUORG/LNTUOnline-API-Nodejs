@@ -6,6 +6,7 @@ npm-debug.log*
 
 # Configuration
 config.js
+cron.sh
 
 # Runtime data
 pids
