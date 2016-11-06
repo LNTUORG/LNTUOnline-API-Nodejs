@@ -13,6 +13,9 @@ var constant = require('../agent/constant');
 var config = require('../config');
 
 router.post('/login', function (req, res) {
+  if (typeof req.body['userId'] == 'undefined' || typeof req.body['password'] == 'undefined' || req.body['userId'] == '') {
+    return res.status(400).json({ code: constant.cookie.args_error, message: 'it seems something went wrong' });
+  }
   var user = {
     id: req.body['userId'],
     login_token: uuid.v4(),
@@ -43,23 +46,24 @@ router.post('/login', function (req, res) {
         return res.status(200).json(generate_dict(user));
       }
     });
-  } else if (req.body['userId'].length == 10) {
-    user.type = 'STUDENT'
   } else {
-    user.type = 'TEACHER'
-  }
-
-  agent.get_cookie(req.body['userId'], req.body['password'], function (err) {
-
-    if (err == constant.cookie.user_error) {
-      return res.status(400).json({ code: err, message: 'password error' });
-    } else if (err == constant.cookie.net_error) {
-      return res.status(500).json({ code: err, message: 'The server may be down.' });
+    if (req.body['userId'].length == 10) {
+      user.type = 'STUDENT'
+    } else {
+      user.type = 'TEACHER'
     }
-    user.password = utility.encrypt(user.password);
-    update_user(user);
-    return res.status(200).json(generate_dict(user));
-  });
+    agent.get_cookie(req.body['userId'], req.body['password'], function (err) {
+
+      if (err == constant.cookie.user_error) {
+        return res.status(400).json({ code: err, message: 'password error' });
+      } else if (err == constant.cookie.net_error) {
+        return res.status(500).json({ code: err, message: 'The server may be down.' });
+      }
+      user.password = utility.encrypt(user.password);
+      update_user(user);
+      return res.status(200).json(generate_dict(user));
+    });
+  }
 });
 
 router.post('/push-token', function (req, res) {
