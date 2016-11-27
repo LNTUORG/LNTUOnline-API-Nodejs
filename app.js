@@ -24,6 +24,8 @@ var course_eva = require('./routes/course_eva');
 var feedback = require('./routes/feedback');
 var appl = require('./routes/application');
 var cors = require('cors');
+var schedule = require('node-schedule');
+var request = require('request');
 
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(useragent.express());
@@ -47,4 +49,10 @@ app.use('/feedback', feedback);
 
 var server = app.listen(config.port, function () {
   console.log('LNTUOnline app listening at http://%s:%s', server.address().address, server.address().port);
+});
+
+var auto_fix = schedule.scheduleJob('*/10 * * * *', function () {
+  request('http://localhost:' + server.address().port + '/application/auto-fix', function (error, response, body) {
+    console.log(body);
+  });
 });

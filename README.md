@@ -24,18 +24,6 @@ For more details, please read [API.md](API.md) or read the sourse code directly(
     npm install
     cp config.example.js config.js
 
-Make some change in your way
-
-    cp cron.example.sh cron.sh
-
-Make some change in your way
-
-    crontab -e
-
-Add the follow lines
-
-    */10 * * * * /path/to/cron.sh
-
 ## Libraries Used
 
 - express
