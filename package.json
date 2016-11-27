@@ -25,6 +25,7 @@
     "node-schedule": "^1.2.0",
     "node-uuid": "^1.4.7",
     "nodemailer": "^2.3.0",
+    "request": "^2.79.0",
     "superagent": "^1.8.0",
     "superagent-charset": "^1.0.0"
   }
