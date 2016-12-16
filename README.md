@@ -56,8 +56,8 @@ If you are interested in this project, please show your code && make a PR.
 
     Liaoning Technical University Education System Agent Server Written In Node.js
 
-    Copyright (C) 2015-2016 LNTU.ORG (https://www.lntu.org)
-    Copyright (C) 2013-2016 PUPBOSS (https://www.pupboss.com)
+    Copyright (C) 2015-2017 LNTU.ORG (https://www.lntu.org)
+    Copyright (C) 2013-2017 PUPBOSS (https://www.pupboss.com)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
