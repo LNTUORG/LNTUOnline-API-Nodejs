@@ -1,5 +1,13 @@
 # Liaoning Technical University Education System Agent Server Written In Node.js
 
+项目已经停止维护。今后基于此代码衍生的任何版本，包不包含恶意程式，请用户自行鉴别。
+
+今后如有任何人，或者任何组织，想要使用此代码衍生新的发行版本，请遵守 AGPL-3.0 的 License。并且在显眼地方注明衍生版字样。
+
+除此之外，不允许作为毕设，课设，软件大赛，等等。
+
+本组织保留一切解释权。
+
 ## Features
 
 - [x] Login
