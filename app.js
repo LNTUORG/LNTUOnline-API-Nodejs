@@ -27,6 +27,8 @@ var cors = require('cors');
 var schedule = require('node-schedule');
 var request = require('request');
 
+app.disable('x-powered-by');
+
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(useragent.express());
 app.use(compression());
