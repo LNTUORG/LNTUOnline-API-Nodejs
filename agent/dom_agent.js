@@ -45,7 +45,7 @@ var get_cookie = function (u_id, passwd, callback) {
     .post(constant.urls[base_url_index] + 'j_acegi_security_check')
     .send('j_username=' + u_id)
     .send('j_password=' + passwd)
-    .timeout(3000)
+    .timeout(30000)
     .set('Accept', 'application/json')
     .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
     .charset('gbk')
@@ -103,7 +103,7 @@ var net_speed = function (u_id, passwd, url, callback) {
     .post(url + 'j_acegi_security_check')
     .send('j_username=' + u_id)
     .send('j_password=' + passwd)
-    .timeout(3000)
+    .timeout(30000)
     .set('Accept', 'application/json')
     .set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36')
     .charset('gbk')
@@ -150,7 +150,7 @@ var test_speed = function (callback) {
       var end = new Date();
       var time_diff = end - start;
       if (err) {
-        time_diff = '3600';
+        time_diff = '360000';
       }
       content += 'test: ' + url + '\n' + 'speed: ' + time_diff + '(ms)\n\n';
       results.push({ res: time_diff, url: url });
