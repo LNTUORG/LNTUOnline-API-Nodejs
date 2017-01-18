@@ -10,7 +10,6 @@ var config = require('../config');
 
 var analyse_class = function(user_id, password, year, term, target, callback) {
 
-  year = 2016;
   var y = parseInt(year) - 1980;
   var t = term == '春' ? 1 : 2;
   target = target + '?year=' + y + '&term=' + t;
